@@ -8,12 +8,14 @@ EveryDayCode
 
 顺便贴上我之前用过的几个在线写代码的网站： 
 
-![codepen](http://codepen.io/gothic/) 
+[codepen](http://codepen.io/gothic/) 
 
-![html5snippet](http://html5snippet.net/people/1434) 
+[html5snippet](http://html5snippet.net/people/1434) 
 
-![run js](http://runjs.cn/square) 
+[run js](http://runjs.cn/square) 
 
-![jsfiddle](http://jsfiddle.net/user/dashboard/)  
+[jsfiddle](http://jsfiddle.net/user/dashboard/)  
 
-![cssdeck](http://cssdeck.com/user/dyygtfx) 
+[cssdeck](http://cssdeck.com/user/dyygtfx)  
+
+[jsbin](http://jsbin.com/edit/1/edit)
