@@ -19,3 +19,8 @@ EveryDayCode
 [cssdeck](http://cssdeck.com/user/dyygtfx)  
 
 [jsbin](http://jsbin.com/edit/1/edit)
+
+
+这里有个练习原生js的好网站，没事可以拿上面的题目来写写 
+
+[js learn](http://js.fgm.cc/learn/)
