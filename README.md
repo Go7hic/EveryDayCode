@@ -1,7 +1,7 @@
 EveryDayCode
 ============
 
-just code4fun
+just coding4fun
 
 
 
