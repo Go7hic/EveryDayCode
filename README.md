@@ -6,9 +6,9 @@ You can write you blog on `GitHub issue` and publish it on `Your Own Domain` use
 
 ### Demo
 
-http://acyort.am0200.com/
+http://code.yongyuan.us/
 
-Site content from here: https://github.com/LoeiFy/AcyOrt/issues
+Site content from here: https://github.com/dyygtfx/EveryDayCode/issues
 
 ### Usage
 
@@ -18,19 +18,18 @@ Site content from here: https://github.com/LoeiFy/AcyOrt/issues
 
 Select your `Repo` one and add content on `issue` 
 
-Example: https://github.com/LoeiFy/AcyOrt/issues
+Example: https://github.com/dyygtfx/EveryDayCode/issues
 
 2 . Add Page
 
 Set the issue `title` after `[page name]`
 
-Example: https://github.com/LoeiFy/AcyOrt/issues/3
+
 
 3 . Add post summary
 
 Just add `<!-- more -->` tag after summary
 
-Example: https://github.com/LoeiFy/AcyOrt/issues/2
 
 4 . Add tags
 
@@ -63,11 +62,11 @@ $ npm i
 ```js
 // config
 module.exports = {
-    url:        'http://acyort.am0200.com',                     // Site Url
-    title:      'AcyOrt',                                       // Blog Title
+    url:        'http://code.yongyuan.us',                     // Site Url
+    title:      'every day code',                                       // Blog Title
     about:      'A Node.js blog tool powered by GitHub.',       // Blog Info    
-    user:       'LoeiFy',                                       // Your GitHub UserName
-    repo:       'AcyOrt',                                       // Your GitHub issue Repo    
+    user:       'dyygtfx',                                       // Your GitHub UserName
+    repo:       'everydaycode',                                       // Your GitHub issue Repo    
     rss:        '/rss.xml',                                     // RSS Link
     perpage:    5,                                              // Posts Per Page
     token:      ''+'',                                          // GitHub Access Token(Optional)
@@ -131,3 +130,4 @@ $ npm run start
 ### License
 
 MIT
+
