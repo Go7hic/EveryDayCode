@@ -3,8 +3,8 @@
 
 module.exports = {
 
-    url:        'http://acyort.am0200.com',                     // Site Url
-    title:      'every day code',                                       // Blog Title
+    url:        'http://code.yongyuan.us',                     // Site Url
+    title:      'Every Day Code',                                       // Blog Title
     about:      '',       // Blog Info
     user:       'dyygtfx',                                       // GitHub UserName
     repo:       'EveryDayCode',                                       // GitHub Repo

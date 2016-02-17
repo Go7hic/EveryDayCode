@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[every day code]]></title><description><![CDATA[every day code]]></description><link>http://acyort.am0200.com</link><generator>RSS for Node</generator><lastBuildDate>Wed, 17 Feb 2016 13:06:32 GMT</lastBuildDate><atom:link href="http://acyort.am0200.com/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 17 Feb 2016 13:06:32 GMT</pubDate><item><title><![CDATA[JS 求中位数]]></title><description><![CDATA[<pre><code>function getMedian(arr) {
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Wed, 17 Feb 2016 13:18:50 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 17 Feb 2016 13:18:50 GMT</pubDate><item><title><![CDATA[JS 求中位数]]></title><description><![CDATA[<pre><code>function getMedian(arr) {
     var len = arr.length;
     arr.sort(function (a,b) {
         return (a-b);
@@ -8,7 +8,7 @@
     var median = (arr[lowMiddle] + arr[hightMiddle]) / 2;
     return median;
 }
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2016/02/133861988.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2016/02/133861988.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Mon, 15 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[编写一个方法 求一个字符串的字节长度]]></title><description><![CDATA[<pre><code> function GetBytes(str){
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/02/133861988.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/02/133861988.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Mon, 15 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[编写一个方法 求一个字符串的字节长度]]></title><description><![CDATA[<pre><code> function GetBytes(str){
 
         var len = str.length;
 
@@ -24,17 +24,17 @@
 
     }
 alert(GetBytes(&#39;hello,你好&#39;))
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2016/02/133549098.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2016/02/133549098.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 13 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[各大框架和库判断是否数组的实现方式]]></title><description><![CDATA[<p>看了一下，现在基本上各大框架都是用 es5 数组自带的 Array.isArray 来判断，比如 vue.js，angular.js(1.x),jquery.js,undescore.js,lodash.js。只有 requery.js 没有用到，requery.js 用的是</p>
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/02/133549098.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/02/133549098.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 13 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[各大框架和库判断是否数组的实现方式]]></title><description><![CDATA[<p>看了一下，现在基本上各大框架都是用 es5 数组自带的 Array.isArray 来判断，比如 vue.js，angular.js(1.x),jquery.js,undescore.js,lodash.js。只有 requery.js 没有用到，requery.js 用的是</p>
 <pre><code>function isArray(it) {
         return Object.prototype.toString.call(it) === &#39;[object Array]&#39;;
     }
 </code></pre><p>当然其中 undescore 和 lodash 两种方法都用了，这就看你的框架和库对浏览器的支持要求了</p>
-]]></description><link>http://acyort.am0200.com/posts/2016/01/128388344.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2016/01/128388344.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 23 Jan 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[移除数组中的元素]]></title><description><![CDATA[<p>移除数组 arr 中的所有值与 item 相等的元素，请直接在给定的 arr 数组上进行操作 
+]]></description><link>http://code.yongyuan.us/posts/2016/01/128388344.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/01/128388344.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 23 Jan 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[移除数组中的元素]]></title><description><![CDATA[<p>移除数组 arr 中的所有值与 item 相等的元素，请直接在给定的 arr 数组上进行操作 
 输入例子:</p>
 <p>removeWithoutCopy([1, 2, 2, 3, 4, 2, 2], 2)</p>
 <p>输出例子:</p>
 <p>[1, 3, 4]</p>
-]]></description><link>http://acyort.am0200.com/posts/2015/07/93301953.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/07/93301953.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[查找两个节点的最近的一个共同父节点，可以包括节点自身 ]]></title><description><![CDATA[<p>查找两个节点的最近的一个共同父节点，可以包括节点自身 
+]]></description><link>http://code.yongyuan.us/posts/2015/07/93301953.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/07/93301953.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[查找两个节点的最近的一个共同父节点，可以包括节点自身 ]]></title><description><![CDATA[<p>查找两个节点的最近的一个共同父节点，可以包括节点自身 
 oNode1 和 oNode2 在同一文档中，且不会为相同的节点</p>
 <pre><code>function commonParentNode(oNode1, oNode2) {
     if(oNode1.contains(oNode2)) {
@@ -47,7 +47,7 @@ oNode1 和 oNode2 在同一文档中，且不会为相同的节点</p>
 }
 </code></pre><p>ps:
 Node.contains()返回一个布尔值来表示是否传入的节点是，该节点的子节点。</p>
-]]></description><link>http://acyort.am0200.com/posts/2015/07/93246877.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/07/93246877.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[preload img ]]></title><description><![CDATA[<p><code>&lt;img id=&quot;thepic&quot; src=&quot;javascript:&#39;&#39;&quot; /&gt;</code></p>
+]]></description><link>http://code.yongyuan.us/posts/2015/07/93246877.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/07/93246877.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[preload img ]]></title><description><![CDATA[<p><code>&lt;img id=&quot;thepic&quot; src=&quot;javascript:&#39;&#39;&quot; /&gt;</code></p>
 <pre><code class="lang-js">var preloadImg = function(url){
         var img = document.createElement(&#39;IMG&#39;); // or var img = new Image();
         img.src = url;
@@ -66,7 +66,7 @@ Node.contains()返回一个布尔值来表示是否传入的节点是，该节�
 
 preloadImg(&#39;http://dyyim.qiniudn.com/wp-content/uploads/2015/07/bg-header.png&#39;);
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2015/07/93168987.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/07/93168987.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[截取字符串abcdefg的efg]]></title><description><![CDATA[<p>截取字符串abcdefg的efg，也就是最后要得到 efg 三个字母。</p>
+]]></description><link>http://code.yongyuan.us/posts/2015/07/93168987.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/07/93168987.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 05 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[截取字符串abcdefg的efg]]></title><description><![CDATA[<p>截取字符串abcdefg的efg，也就是最后要得到 efg 三个字母。</p>
 <p>今天在网上五一看到这个题目，想了一下方法还是挺多的。</p>
 <p>我随便想了几个方法：</p>
 <ol>
@@ -92,7 +92,7 @@ if(re.test(a)){
 　　 console.lop(efg);
 }</p>
 <p>方法太多，具体的区别暂时就不分析了</p>
-]]></description><link>http://acyort.am0200.com/posts/2015/07/93113151.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/07/93113151.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 04 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[CSS 实现隔两行换色]]></title><description><![CDATA[<pre><code>&lt;ul&gt;
+]]></description><link>http://code.yongyuan.us/posts/2015/07/93113151.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/07/93113151.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 04 Jul 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[CSS 实现隔两行换色]]></title><description><![CDATA[<pre><code>&lt;ul&gt;
     &lt;li&gt;dddddd&lt;/li&gt;
     &lt;li&gt;dddddd&lt;/li&gt;
     &lt;li&gt;aaaaa&lt;/li&gt;
@@ -110,7 +110,7 @@ ul li:nth-child(4n-2) {
 
     background: red;
 }
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/03/60366594.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/03/60366594.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 08 Mar 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[css 关于导航之间的 竖线 合理的写法]]></title><description><![CDATA[<p>这个写法有很多，用图片，用 border ，不过合理的感觉还是这个方法</p>
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/03/60366594.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/03/60366594.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 08 Mar 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[css 关于导航之间的 竖线 合理的写法]]></title><description><![CDATA[<p>这个写法有很多，用图片，用 border ，不过合理的感觉还是这个方法</p>
 <pre><code>&lt;ul&gt;
     &lt;li&gt;ddd&lt;/li&gt;
     &lt;li&gt;ddd&lt;/li&gt;
@@ -120,7 +120,7 @@ ul li:nth-child(4n-2) {
 </code></pre><pre><code>ul li {float: left;list-style: none;}
 ul li:before {content: &quot;|&quot;;}
 ul li:first-child:before {content:&quot;&quot;};
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/03/59615001.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/03/59615001.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Mon, 02 Mar 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[给数组对象添加方法(面向对象)]]></title><description><![CDATA[<pre><code> Array.prototype.sum = function () {
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/03/59615001.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/03/59615001.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Mon, 02 Mar 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[给数组对象添加方法(面向对象)]]></title><description><![CDATA[<pre><code> Array.prototype.sum = function () {
             for (var sum = i = 0;i &lt; this.length; i++) {
                 sum += parseInt(this[i]);
             }
@@ -135,7 +135,7 @@ ul li:first-child:before {content:&quot;&quot;};
         var arr = new array;
         console.log(arr.join(&quot;+&quot;) + &quot;=&quot; + arr.sum());
         console.log(arr.join(&quot;|&quot;) + &quot;中，最大的数是：&quot; + arr.maxima());
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/03/59397842.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/03/59397842.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 28 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 日期与时间戳互换]]></title><description><![CDATA[<pre><code>function datetime_to_unix(datetime){
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/03/59397842.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/03/59397842.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 28 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 日期与时间戳互换]]></title><description><![CDATA[<pre><code>function datetime_to_unix(datetime){
     var tmp_datetime = datetime.replace(/:/g,&#39;-&#39;);
     tmp_datetime = tmp_datetime.replace(/ /g,&#39;-&#39;);
     var arr = tmp_datetime.split(&quot;-&quot;);
@@ -156,7 +156,7 @@ document.write(datetime+&#39; 转换后的时间戳为: &#39;+unix+&#39;
 var unix = 1353033300;
 var datetime = unix_to_datetime(unix);
 document.write(unix+&#39; 转换后的日期为: &#39;+datetime);
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/02/56994733.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/02/56994733.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Thu, 12 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# Js Dom复习]]></title><description><![CDATA[<p>没事写的玩</p>
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/02/56994733.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/02/56994733.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Thu, 12 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[Js Dom复习]]></title><description><![CDATA[<p>没事写的玩</p>
 <pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -227,7 +227,7 @@ document.write(unix+&#39; 转换后的日期为: &#39;+datetime);
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2015/01/55712823.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/01/55712823.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[svg study 1]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2015/01/55712823.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/01/55712823.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[svg study 1]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -293,7 +293,7 @@ Strok属性
  &lt;/svg&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/01/55603304.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/01/55603304.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 28 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# Js 单体模式]]></title><description><![CDATA[<p>第二次创建的对象与第一次完全相同，预期的结果如下
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/01/55603304.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/01/55603304.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 28 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[Js 单体模式]]></title><description><![CDATA[<p>第二次创建的对象与第一次完全相同，预期的结果如下
 var a = new Test()
 var b = new Test()
 a === b; //结果为 true</p>
@@ -330,7 +330,7 @@ var b = new Test();
 a === b
 </code></pre>
 <p>这个闭包的方法有个缺点就是添加到 Ts=est() 的原型中的对象都不会存在指向由原始实现所创见实例的链接</p>
-]]></description><link>http://acyort.am0200.com/posts/2015/01/53996195.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/01/53996195.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 文本框自动伸缩]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2015/01/53996195.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/01/53996195.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 文本框自动伸缩]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -357,7 +357,7 @@ a === b
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2015/01/53994375.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/01/53994375.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[类似天猫购物车抛物线的效果]]></title><description><![CDATA[<pre><code class="lang-html"> &lt;div class=&quot;start&quot;&gt;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2015/01/53994375.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/01/53994375.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[类似天猫购物车抛物线的效果]]></title><description><![CDATA[<pre><code class="lang-html"> &lt;div class=&quot;start&quot;&gt;
 
     &lt;/div&gt;
     &lt;div class=&quot;end&quot;&gt;
@@ -628,7 +628,7 @@ a === b
     });
     &lt;/script&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2015/01/53360396.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2015/01/53360396.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 小米的两道 js 面试题]]></title><description><![CDATA[<p>博客园上看到的题目，拿来学习一下</p>
+]]></description><link>http://code.yongyuan.us/posts/2015/01/53360396.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2015/01/53360396.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 小米的两道 js 面试题]]></title><description><![CDATA[<p>博客园上看到的题目，拿来学习一下</p>
 <p>一、</p>
 <p>请定义这样一个函数 </p>
 <p>function repeat (func, times, wait) {</p>
@@ -642,7 +642,7 @@ a === b
 <p>var result1 = stringconcat(&quot;a&quot;, &quot;b&quot;)  result1 = &quot;a+b&quot;</p>
 <p>var stringconcatWithPrefix = stringconcat.prefix(&quot;hellworld&quot;);</p>
 <p>var result2 = stringconcatWithPrefix(&quot;a&quot;, &quot;b&quot;)  result2 = &quot;hellworld+a+b&quot;</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/11/49904782.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/49904782.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#php# 复习下php 一个简单的表单验证]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/11/49904782.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/49904782.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[ 复习下php 一个简单的表单验证]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -730,7 +730,7 @@ a === b
   ?&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/11/49583956.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/49583956.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[按钮的一个样式，鼠标滑上去有个闪光的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;a id=&quot;show-more&quot;&gt;More&lt;/a&gt;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/11/49583956.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/49583956.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[按钮的一个样式，鼠标滑上去有个闪光的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;a id=&quot;show-more&quot;&gt;More&lt;/a&gt;
 </code></pre>
 <pre><code class="lang-css">#show-more {
 display: block;
@@ -774,7 +774,7 @@ transition: transform 0.3s ease;
 }
 </code></pre>
 <p>demo : <a href="http://jsfiddle.net/gothic/zk4jbnqn/1/">http://jsfiddle.net/gothic/zk4jbnqn/1/</a></p>
-]]></description><link>http://acyort.am0200.com/posts/2014/11/49028461.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/49028461.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[你真的懂 js 吗？]]></title><description><![CDATA[<p>五个 js 题目，看起来没有啥意义，但是考的都是基本的东西，从汤姆大叔博客看到的，连猜带蒙都蒙对了。</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/11/49028461.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/49028461.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[你真的懂 js 吗？]]></title><description><![CDATA[<p>五个 js 题目，看起来没有啥意义，但是考的都是基本的东西，从汤姆大叔博客看到的，连猜带蒙都蒙对了。</p>
 <p>题目1：</p>
 <p>if (!(&quot;a&quot; in window)) {
     var a = 1;
@@ -803,7 +803,7 @@ b(1, 2, 3);</p>
     alert(this);
 }
 a.call(null);</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/11/48511441.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/48511441.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 自动播放幻灯片（缓冲效果）]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/11/48511441.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/48511441.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 自动播放幻灯片（缓冲效果）]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -964,7 +964,7 @@ a.call(null);</p>
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/11/48240729.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/48240729.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 简单抽奖程序]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/11/48240729.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/48240729.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 简单抽奖程序]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -1062,7 +1062,7 @@ a.call(null);</p>
  &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/11/48170342.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/48170342.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#jQuery# 导航滚动焦点]]></title><description><![CDATA[<p>导航滚动焦点</p>
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/11/48170342.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/48170342.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[导航滚动焦点]]></title><description><![CDATA[<p>导航滚动焦点</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -1266,7 +1266,7 @@ a.call(null);</p>
 &lt;/body&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/11/47987524.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/11/47987524.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[Front End Web Development Quiz ]]></title><description><![CDATA[<p><a href="http://davidshariff.com/quiz/">http://davidshariff.com/quiz/</a> 未完
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/11/47987524.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/11/47987524.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[Front End Web Development Quiz ]]></title><description><![CDATA[<p><a href="http://davidshariff.com/quiz/">http://davidshariff.com/quiz/</a> 未完
 CSS篇：
 1.</p>
 <pre><code>ul {
@@ -1772,7 +1772,7 @@ alert(typeof foo.length);
 <blockquote>
 <p>delete can&#39;t remove certain properties of predefined objects (like Object, Array, Math etc). These are described in ECMAScript 5 and later as non-configurable</p>
 </blockquote>
-]]></description><link>http://acyort.am0200.com/posts/2014/10/46925782.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/10/46925782.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 02 Nov 2014 16:00:00 GMT</pubDate></item><item><title><![CDATA[#jq# 网页字体大小 2014 1009]]></title><description><![CDATA[<p>html</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/10/46925782.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/10/46925782.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 02 Nov 2014 16:00:00 GMT</pubDate></item><item><title><![CDATA[网页字体大小 2014 1009]]></title><description><![CDATA[<p>html</p>
 <pre><code>&lt;div class=&quot;msg&quot;&gt;
         &lt;div class=&quot;msg_caption&quot;&gt;
             &lt;span class=&quot;bigger&quot;&gt;放大&lt;/span&gt;
@@ -1801,7 +1801,7 @@ alert(typeof foo.length);
             $(&#39;#para&#39;).css(&#39;font-size&#39;, textFontSize + unit);
         });
     })
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/10/45380063.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/10/45380063.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[jQuery 滚动动画效果10.08]]></title><description><![CDATA[<p>html:</p>
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/10/45380063.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/10/45380063.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[jQuery 滚动动画效果10.08]]></title><description><![CDATA[<p>html:</p>
 <pre><code>&lt;div class=&quot;v_show&quot;&gt;
         &lt;div class=&quot;v_caption&quot;&gt;
             &lt;h2 class=&quot;cartoon&quot; title=&quot;卡通动漫&quot;&gt;卡通动漫&lt;/h2&gt;
@@ -1913,7 +1913,7 @@ alert(typeof foo.length);
         });
 
         })
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/10/45255503.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/10/45255503.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 创建桌面快捷方式 10.08]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE HTML&gt;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/10/45255503.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/10/45255503.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 创建桌面快捷方式 10.08]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;桌面创建快捷方式&lt;/title&gt;
@@ -1975,24 +1975,24 @@ alert(typeof foo.length);
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/10/45212629.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/10/45212629.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js动态生成表格 9.22]]></title><description><![CDATA[<p> 1) 任意输入行数或列数, 生成对应表格;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/10/45212629.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/10/45212629.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js动态生成表格 9.22]]></title><description><![CDATA[<p> 1) 任意输入行数或列数, 生成对应表格;
  2) 行数, 列数必须为正整数类型, 否则提示非法;(这里我用正则限制1-100, 避免网友测试输入过大值造成浏览器假死)
  3) 在生成表格的单元格中随机填入1到15之间的随机数, 并给每个单元格设置随机背景颜色;
  4) 点击任意单元格, 将其数和背景颜色输出显示;
  5) 效率要求：100<em>100生成表格时间小于3秒;
  6) 代码中要用到事件代理机制;
  7) 设计一种简单机制, 使单元格数小于255</em>255*255时, 颜色不重复</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/09/43505063.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/09/43505063.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[点击显示全部再点击显示部分]]></title><description><![CDATA[<p>各大电商网站可以看到这种效果，下面一个更多或者点击显示全部按钮，再点击就回到原来的状态。可以分别用 js 和 jq 来实现下这种效果。</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/09/41884248.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/09/41884248.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 获取表单下拉框的文件 8.30]]></title><description><![CDATA[<p>题目：就是给你一个原生的下拉表单，然后再给一个 a 标签，表单里的value值为url，要求每次选择相应的列表，点击 a 标签能打开对应的 url</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/08/41529377.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/08/41529377.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Thu, 12 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[jQuery全屏响应式幻灯片8.28 ]]></title><description><![CDATA[<p>今天做了一个全屏响应式的幻灯片轮播效果图，一开始想用原生js写，但是后来还是觉得用jQ比较快，所以就用jq做了，图片也直接引用了，懒得改。下次有时间补上原生js写的</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/08/41405615.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/08/41405615.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js无缝滚动效果8.26]]></title><description><![CDATA[<p>写一个无缝滚动的效果，一般新闻网站常见的那种向上滚动效果，鼠标一放上去，滚动即停止。</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/08/41182346.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/08/41182346.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[纯css画十字架 8.21]]></title><description><![CDATA[<p>好久没玩这个了，继续。
+]]></description><link>http://code.yongyuan.us/posts/2014/09/43505063.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/09/43505063.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[点击显示全部再点击显示部分]]></title><description><![CDATA[<p>各大电商网站可以看到这种效果，下面一个更多或者点击显示全部按钮，再点击就回到原来的状态。可以分别用 js 和 jq 来实现下这种效果。</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/09/41884248.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/09/41884248.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 获取表单下拉框的文件 8.30]]></title><description><![CDATA[<p>题目：就是给你一个原生的下拉表单，然后再给一个 a 标签，表单里的value值为url，要求每次选择相应的列表，点击 a 标签能打开对应的 url</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/08/41529377.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/08/41529377.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Thu, 12 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[jQuery全屏响应式幻灯片8.28 ]]></title><description><![CDATA[<p>今天做了一个全屏响应式的幻灯片轮播效果图，一开始想用原生js写，但是后来还是觉得用jQ比较快，所以就用jq做了，图片也直接引用了，懒得改。下次有时间补上原生js写的</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/08/41405615.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/08/41405615.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js无缝滚动效果8.26]]></title><description><![CDATA[<p>写一个无缝滚动的效果，一般新闻网站常见的那种向上滚动效果，鼠标一放上去，滚动即停止。</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/08/41182346.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/08/41182346.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[纯css画十字架 8.21]]></title><description><![CDATA[<p>好久没玩这个了，继续。
 绘制一个如图红色十字架，方块长150px，宽50px：
 要求：</p>
 <p>使用2个div完成
 使用3个div完成
 使用5个div完成</p>
-]]></description><link>http://acyort.am0200.com/posts/2014/08/40777578.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/08/40777578.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ js 仿苹果电脑任务栏效果]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/08/40777578.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/08/40777578.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ js 仿苹果电脑任务栏效果]]></title><description><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2038,7 +2038,7 @@ alert(typeof foo.length);
     &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/08/39906266.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/08/39906266.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 自动播放幻灯片--带缓冲效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/08/39906266.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/08/39906266.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 自动播放幻灯片--带缓冲效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2195,7 +2195,7 @@ alert(typeof foo.length);
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/07/38094221.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/07/38094221.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#html5# 本地存储表单]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/07/38094221.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/07/38094221.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[html5 本地存储表单]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2254,7 +2254,7 @@ alert(typeof foo.length);
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/07/38086107.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/07/38086107.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js一个简单的时钟计时器]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/07/38086107.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/07/38086107.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js一个简单的时钟计时器]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2291,7 +2291,7 @@ alert(typeof foo.length);
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/07/38051014.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/07/38051014.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[html5上传读取文件]]></title><description><![CDATA[<p>一次只能读取一个文件，readAsText()方法处理文本内容得到文件。</p>
+]]></description><link>http://code.yongyuan.us/posts/2014/07/38051014.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/07/38051014.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[html5上传读取文件]]></title><description><![CDATA[<p>一次只能读取一个文件，readAsText()方法处理文本内容得到文件。</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
@@ -2329,7 +2329,7 @@ alert(typeof foo.length);
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>]]></description><link>http://acyort.am0200.com/posts/2014/07/37522043.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/07/37522043.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js事件练习：绑定，接触]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2014/07/37522043.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/07/37522043.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js事件练习：绑定，接触]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2406,7 +2406,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/07/37141093.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/07/37141093.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js左右栏拖动的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/07/37141093.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/07/37141093.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js左右栏拖动的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2488,7 +2488,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/36238704.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/36238704.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ js拖拽效果，回放拖拽轨迹]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/36238704.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/36238704.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ js拖拽效果，回放拖拽轨迹]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2584,7 +2584,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
     &lt;/body&gt;
     &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/36225891.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/36225891.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[css函数、设置读取对象属性]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/36225891.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/36225891.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[css函数、设置读取对象属性]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2657,7 +2657,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35747210.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35747210.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js一个简单的函数传参]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35747210.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35747210.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js一个简单的函数传参]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2729,7 +2729,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35742446.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35742446.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 简单的js年历]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35742446.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35742446.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ 简单的js年历]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2831,7 +2831,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35598796.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35598796.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js简单的弹出窗]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35598796.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35598796.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js简单的弹出窗]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2913,7 +2913,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35491239.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35491239.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js记住密码效果提示框]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35491239.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35491239.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js记住密码效果提示框]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -2966,7 +2966,7 @@ this.addHandler(window, &quot;load&quot;, fnHandler)
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35482279.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35482279.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 点击输入框变化]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35482279.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35482279.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 点击输入框变化]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -3069,7 +3069,7 @@ window.onload = function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35438853.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35438853.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[自动播放幻灯片练习]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35438853.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35438853.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[自动播放幻灯片练习]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -3235,7 +3235,7 @@ window.onload = function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/06/35290592.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/06/35290592.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ 点击DIV就闪烁的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/06/35290592.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/06/35290592.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[ 点击DIV就闪烁的效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -3277,7 +3277,7 @@ window.onload = function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/05/34711162.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34711162.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 键盘控制DIV事件，移动，放大等效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34711162.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34711162.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 键盘控制DIV事件，移动，放大等效果]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -3434,7 +3434,7 @@ window.onload = function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/05/34553727.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34553727.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[鼠标移动到图片上，图片放大效果，切跟随鼠标移动，图片一直放大]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34553727.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34553727.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[鼠标移动到图片上，图片放大效果，切跟随鼠标移动，图片一直放大]]></title><description><![CDATA[<pre><code class="lang-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -3537,13 +3537,61 @@ window.onload = function () {
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/05/34283805.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34283805.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 阻止右键菜单]]></title><description><![CDATA[<pre><code class="lang-javascript">document.oncontextmenu = function() {
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34283805.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34283805.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 阻止右键菜单]]></title><description><![CDATA[<pre><code class="lang-javascript">document.oncontextmenu = function() {
     return false
 }
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/05/34227998.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34227998.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 点击网页显示坐标]]></title><description><![CDATA[<pre><code class="lang-javascript">document.onclick = function(event) {
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34227998.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34227998.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 点击网页显示坐标]]></title><description><![CDATA[<pre><code class="lang-javascript">document.onclick = function(event) {
         var event = event || window.event;
         alert (&quot;坐标：[&quot;+event.clientX+&quot;,&quot;+event.clientY+&quot;]&quot;)
     }
 </code></pre>
-]]></description><link>http://acyort.am0200.com/posts/2014/05/34225626.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34225626.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item><item><title><![CDATA[#js# 模拟select控件]]></title><link>http://acyort.am0200.com/posts/2014/05/34222182.html</link><guid isPermaLink="true">http://acyort.am0200.com/posts/2014/05/34222182.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 10 Feb 2015 16:00:00 GMT</pubDate></item></channel></rss>
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34225626.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34225626.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 模拟select控件]]></title><description><![CDATA[<pre><code class="lang-html">&lt;div class=&quot;search&quot;&gt;
+        &lt;div class=&quot;box&quot;&gt;
+            &lt;form action=&quot;&quot;&gt;
+                &lt;span class=&quot;select&quot;&gt;幻想世界&lt;/span&gt;
+                &lt;a href=&quot;javascript:;
+                &quot;&gt;搜索&lt;/a&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;ul class=&quot;sub&quot; style=&quot;display: none;
+        &quot;&gt;
+        &lt;li class=&quot;&quot;&gt;地下城与勇士&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;魔兽世界（国服）&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;魔兽世界（台服）&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;热血江湖&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;神鬼传奇&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;大话西游II&lt;/li&gt;
+        &lt;li class=&quot;&quot;&gt;QQ幻想世界&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="lang-javascript">window.onload = function () {
+        var oSelect = document.getElementsagNameByTagName(&quot;span&quot;)[0];
+        var oSub = document.getElementsByTagName(&quot;ul&quot;)[0];
+        var aLi = oSub.getElementsByTagName(&quot;li&quot;)
+        var i = 0;
+        oSelect.onclick = function(event) {
+            var style = oSub.style;
+            style.display = style.display == &quot;block&quot; ? &quot;none&quot;:&quot;block&quot;;
+            (event || window.event).cancelBubble = true
+        };
+        for (i = 0;i&lt;aLi.length;i++) {
+                //鼠标滑过
+                aLi[i].onmouseover = function () {
+                    this.className = &quot;hover&quot;
+                };
+                //鼠标离开
+                aLi[i].onmouseout = function() {
+                    this.className = &quot;&quot;;
+                }
+                //鼠标点击
+                aLi[i].onclick = function() {
+                    oSelect.innerHTML = this.innerHTML
+                }
+        }
+    document.onclick = function () {
+        oSub.style.display = &quot;none&quot;;
+    }
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2014/05/34222182.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2014/05/34222182.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 16 Feb 2016 16:00:00 GMT</pubDate></item></channel></rss>
