@@ -4,16 +4,16 @@
 module.exports = {
 
     url:        'http://acyort.am0200.com',                     // Site Url
-    title:      'AcyOrt',                                       // Blog Title
-    about:      'A Node.js blog tool powered by GitHub.',       // Blog Info    
-    user:       'LoeiFy',                                       // GitHub UserName
-    repo:       'AcyOrt',                                       // GitHub Repo    
+    title:      'every day code',                                       // Blog Title
+    about:      '',       // Blog Info
+    user:       'dyygtfx',                                       // GitHub UserName
+    repo:       'EveryDayCode',                                       // GitHub Repo
     rss:        '/rss.xml',                                     // RSS Link
-    perpage:    5,                                              // Posts Per Page
+    perpage:    10,                                              // Posts Per Page
     token:      ''+'',                                          // GitHub Access Token(Optional)
-    authors:    ['LoeiFy'],                                     // Post Authors
-    duoshuo:    'ipsum',                                        // Duoshuo shortname
-    disqus:     'acyort',                                       // Disqus shortname
+    authors:    ['dyygtfx'],                                     // Post Authors
+    duoshuo:    '',                                        // Duoshuo shortname
+    disqus:     '哥特复兴',                                       // Disqus shortname
     menu: [                                                     // Menu
         {name: 'home', url: '/'},
         {name: 'about', url: '/page/about/'},
