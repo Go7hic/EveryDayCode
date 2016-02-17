@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title> {{{page_title}}} - {{{site_title}}} </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">{{{site_title}}}</a></h1>
+        <p>{{{site_about}}}</p>
+    </div>
+    <div class="menu">
+    {{#menu}}
+        <a href="{{{url}}}">{{{name}}}</a>
+    {{/menu}}
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>{{{title}}}</h1>
+
+    <div class="content">{{{marked_body}}}</div>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © {{{full_year}}} {{{site_title}}} . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="{{{rss}}}">RSS</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title> {{{name}}} - {{{site_title}}} </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">{{{site_title}}}</a></h1>
+        <p>{{{site_about}}}</p>
+    </div>
+    <div class="menu">
+    {{#menu}}
+        <a href="{{{url}}}">{{{name}}}</a>
+    {{/menu}}
+    </div>
+</div>
+
+<div id="posts" class="center">
+
+    <h2 class="tag">Tag : <span>#{{{name}}}</span></h2>
+
+    <ul>
+    {{#posts}}
+        <li>
+
+        <div class="post">
+            <h2><a href="{{{path}}}">{{{title}}}</a></h2>
+            <p>{{{summary}}}</p>
+            <p class="time">{{{post_time}}}</p>
+        </div>
+
+        <a class="author" href="{{{user.html_url}}}" target="_blank">
+            <img src="{{{user.avatar_url}}}" />
+        </a>
+
+        </li>
+    {{/posts}}
+    </ul>
+
+    <div id="pagination">
+        <a rel="prev" class="{{{prev.css}}}" href="{{{prev.url}}}">← Newer Posts</a>
+        <a rel="next" class="{{{next.css}}}" href="{{{next.url}}}">Older Posts →</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © {{{full_year}}} {{{site_title}}} . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="{{{rss}}}">RSS</a>
+    </div>
+</div>
+
+</body>
+</html>
