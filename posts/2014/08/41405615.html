@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>jQuery全屏响应式幻灯片8.28  - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>jQuery全屏响应式幻灯片8.28 </h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><p>今天做了一个全屏响应式的幻灯片轮播效果图，一开始想用原生js写，但是后来还是觉得用jQ比较快，所以就用jq做了，图片也直接引用了，懒得改。下次有时间补上原生js写的</p>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/jQuery/">#jQuery</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="41405615" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="41405615" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

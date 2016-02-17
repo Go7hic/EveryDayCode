@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js动态生成表格 9.22 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js动态生成表格 9.22</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><p> 1) 任意输入行数或列数, 生成对应表格;
+ 2) 行数, 列数必须为正整数类型, 否则提示非法;(这里我用正则限制1-100, 避免网友测试输入过大值造成浏览器假死)
+ 3) 在生成表格的单元格中随机填入1到15之间的随机数, 并给每个单元格设置随机背景颜色;
+ 4) 点击任意单元格, 将其数和背景颜色输出显示;
+ 5) 效率要求：100<em>100生成表格时间小于3秒;
+ 6) 代码中要用到事件代理机制;
+ 7) 设计一种简单机制, 使单元格数小于255</em>255*255时, 颜色不重复</p>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="43505063" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="43505063" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

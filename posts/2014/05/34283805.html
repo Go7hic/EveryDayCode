@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>鼠标移动到图片上，图片放大效果，切跟随鼠标移动，图片一直放大 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>鼠标移动到图片上，图片放大效果，切跟随鼠标移动，图片一直放大</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>点击图标<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="undefined">
+        html,body {overflow: hidden;}
+        body,div,ul,li {margin: 0;padding: 0;}
+        #box ul {
+            width: 768px;
+            height: 172px;
+            margin: 10px auto;
+            list-style: none;
+        }
+        #box li {
+            display: inline;
+            float: left;
+            width: 170px;
+            height: 170px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+
+        }
+        #box li.active {border: 1px solid #a10000;}
+        #box li img {
+            width: 170px;
+            height: 170px;
+            vertical-align: top;
+        }
+        #big {
+            position: absolute;
+            display: none;
+            width: 400px;
+            height: 400px;
+            border: 2px so9lid #ddd;
+        }
+        #big div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 400px;
+            height: 400px;
+            opacity: .5;
+            filter: alpha(opacity=50);
+            background: #fff url(http://js.fgm.cc/learn/lesson5/img/loading.gif) 50% 50% no-repeat;)
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson5/img/shirt_1.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson5/img/shirt_2.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson5/img/shirt_3.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson5/img/shirt_4.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"big"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> aLi = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"li"</span>);
+            <span class="hljs-keyword">var</span> oBig = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"big"</span>);
+            <span class="hljs-keyword">var</span> oLoading = oBig.getElementsByTagName(<span class="hljs-string">"div"</span>)[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">for</span> (i= <span class="hljs-number">0</span>;i &lt; aLi.length;i++) {
+                aLi[i].index = i;
+        <span class="hljs-comment">// 鼠标滑过，预加载图片插入容器并提示</span>
+        aLi[i].onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> oImg = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"img"</span>);
+            <span class="hljs-keyword">var</span> img = <span class="hljs-keyword">new</span> Image();
+            <span class="hljs-comment">// 图片预加载</span>
+            img.src = oImg.src = aLi[<span class="hljs-keyword">this</span>.index].getElementsByTagName(<span class="hljs-string">"img"</span>)[<span class="hljs-number">0</span>].src.replace(<span class="hljs-string">".jpg"</span>,<span class="hljs-string">"_big.jpg"</span>);
+            <span class="hljs-comment">//插入大图片</span>
+            oBig.appendChild(oImg);
+            <span class="hljs-keyword">this</span>.className = <span class="hljs-string">"active"</span>;
+            <span class="hljs-comment">// 显示big</span>
+            oBig.style.display = oLoading.style.display = <span class="hljs-string">"block"</span>;
+            <span class="hljs-comment">// 判断大图是否加载成功</span>
+            img.complete?oLoading.style.display = <span class="hljs-string">"none"</span>:(oImg.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{oLoad.style.display = <span class="hljs-string">"none"</span>})
+
+        };
+        <span class="hljs-comment">// 鼠标移动，大图容器跟随鼠标移动</span>
+        aLi[i].onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+            <span class="hljs-keyword">var</span> event = event || <span class="hljs-built_in">window</span>.event;
+            <span class="hljs-keyword">var</span> iWidth = <span class="hljs-built_in">document</span>.documentElement.offsetWidth - event.clientX;
+            oBig.style.top = event.clientY + <span class="hljs-number">20</span> + <span class="hljs-string">"px"</span>;
+            oBig.style.left = (iWidth &lt; oBig.offsetWidth + <span class="hljs-number">10</span>?event.clientX - oBig.offsetWidth - <span class="hljs-number">10</span>:event.clientX + <span class="hljs-number">10</span>) + <span class="hljs-string">"px"</span>
+        }
+            <span class="hljs-comment">// 鼠标离开，删除大图并隐藏大图容器</span>
+            aLi[i].onmouseout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">this</span>.className = <span class="hljs-string">""</span>;
+                oBig.style.display = <span class="hljs-string">"none"</span>;
+                oBig.removeChild(oBig.lastChild)
+            }
+        }
+    }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="34283805" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="34283805" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

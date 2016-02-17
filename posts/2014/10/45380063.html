@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>#jq# 网页字体大小 2014 1009 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>#jq# 网页字体大小 2014 1009</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><p>html</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"msg"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"msg_caption"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"bigger"</span>&gt;</span>放大<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"smaller"</span>&gt;</span>缩小<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"para"</span>&gt;</span>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam quidem delectus explicabo nostrum, perferendis doloribus consequuntur nam, perspiciatis aspernatur reprehenderit quibusdam laboriosam praesentium ratione, tempora, quod iusto repudiandae voluptatibus harum.
+            <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><p>jq</p>
+<pre><code>$(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        $(<span class="hljs-string">'span'</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> thisEle = $(<span class="hljs-string">'#para'</span>).css(<span class="hljs-string">'font-size'</span>);
+            <span class="hljs-keyword">var</span> textFontSize = <span class="hljs-built_in">parseInt</span>(thisEle, <span class="hljs-number">10</span>);
+            <span class="hljs-keyword">var</span> unit = thisEle.slice(<span class="hljs-number">-2</span>);
+            <span class="hljs-keyword">var</span> cName = $(<span class="hljs-keyword">this</span>).attr(<span class="hljs-string">'class'</span>);
+            <span class="hljs-keyword">if</span>(cName == <span class="hljs-string">'bigger'</span>) {
+            <span class="hljs-keyword">if</span>(textFontSize &lt;= <span class="hljs-number">22</span>) {
+                textFontSize += <span class="hljs-number">2</span>;
+                }
+            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cName == <span class="hljs-string">'smaller'</span>) {
+                textFontSize -= <span class="hljs-number">2</span>;
+            }
+            $(<span class="hljs-string">'#para'</span>).css(<span class="hljs-string">'font-size'</span>, textFontSize + unit);
+        });
+    })
+</code></pre></div>
+
+    <div class="label">
+    <div><a href="/tags/jQuery/">#jQuery</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="45380063" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="45380063" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

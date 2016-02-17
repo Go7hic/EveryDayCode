@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title> js拖拽效果，回放拖拽轨迹 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1> js拖拽效果，回放拖拽轨迹</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>拖拽效果<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">html</span> <span class="hljs-selector-tag">body</span> {<span class="hljs-attribute">overflow</span>: hidden;}
+        <span class="hljs-selector-tag">body</span>,<span class="hljs-selector-tag">div</span>,<span class="hljs-selector-tag">h2</span> <span class="hljs-selector-tag">p</span>{<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;}
+        <span class="hljs-selector-tag">body</span> {<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;<span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;<span class="hljs-attribute">font</span>: <span class="hljs-number">12px</span>/<span class="hljs-number">2</span>;}
+        <span class="hljs-selector-tag">p</span> {<span class="hljs-attribute">padding</span>:<span class="hljs-number">0</span> <span class="hljs-number">10px</span>;<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;}
+        <span class="hljs-selector-tag">span</span> {<span class="hljs-attribute">padding-left</span>: <span class="hljs-number">5px</span>;<span class="hljs-attribute">color</span>: <span class="hljs-number">#ff0</span>;}
+        <span class="hljs-selector-id">#box</span> {<span class="hljs-attribute">position</span>: absolute;<span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;<span class="hljs-attribute">height</span>: <span class="hljs-number">150px</span>;<span class="hljs-attribute">margin</span>:-<span class="hljs-number">75px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> -<span class="hljs-number">150px</span>;<span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#ccc</span>;<span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;<span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;<span class="hljs-attribute">background</span>: <span class="hljs-number">#333</span>;}
+        <span class="hljs-selector-id">#box</span> <span class="hljs-selector-tag">h2</span> {<span class="hljs-attribute">height</span>: <span class="hljs-number">25px</span>;<span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;<span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#ccc</span>;<span class="hljs-attribute">text-align</span>: right;<span class="hljs-attribute">background</span>: <span class="hljs-number">#222</span>; <span class="hljs-attribute">cursor</span>:move;}
+        <span class="hljs-selector-id">#box</span> <span class="hljs-selector-tag">h2</span> <span class="hljs-selector-tag">a</span> {<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;<span class="hljs-attribute">text-decoration</span>: none;<span class="hljs-attribute">outline</span>: none;}
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">window</span>.onload=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> oBox = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);
+            <span class="hljs-keyword">var</span> oH2 = oBox.getElementsByTagName(<span class="hljs-string">"h2"</span>)[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">var</span> oA = oBox.getElementsByTagName(<span class="hljs-string">"a"</span>)[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">var</span> aSpan = oBox.getElementsByTagName(<span class="hljs-string">"span"</span>);
+            <span class="hljs-keyword">var</span> disX = disY = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">var</span> bDrag = <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">var</span> aPos = [{x:oBox.offsetLeft,y:oBox.offsetTop}]
+
+            <span class="hljs-comment">// 鼠标按下，激活拖拽</span>
+            oH2.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+                <span class="hljs-keyword">var</span> event = event||<span class="hljs-built_in">window</span>.event;
+                bDrag = <span class="hljs-literal">true</span>;
+                disX = event.clientX - oBox.offsetLeft;
+                disY = event.clientY - oBox.offsetTop;
+                aPos.push({x:oBox.offsetLeft,y:oBox.offsetTop})
+                <span class="hljs-keyword">this</span>.setCapture&amp;&amp;<span class="hljs-keyword">this</span>.setCapture();
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            };
+
+            <span class="hljs-comment">// 拖拽开始</span>
+            <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+                <span class="hljs-keyword">if</span>(!bDrag)<span class="hljs-keyword">return</span>;
+                <span class="hljs-keyword">var</span> event = event||<span class="hljs-built_in">window</span>.event;
+                <span class="hljs-keyword">var</span> iL = event.clientX-disX;
+                <span class="hljs-keyword">var</span> iT = event.clientY-disY;
+                <span class="hljs-keyword">var</span> maxL = <span class="hljs-built_in">document</span>.documentElement.clientWidth-oBox.offsetWidth;
+                <span class="hljs-keyword">var</span> maxT = <span class="hljs-built_in">document</span>.documentElement.clientHeight-oBox.offsetHeight;
+                iL = iL&lt;<span class="hljs-number">0</span>?<span class="hljs-number">0</span>:iL;
+                iL = iL&gt;maxL?maxL:iL;
+                iT = iT&gt;maxT?maxT:iT;
+                oBox.style.marginTop = oBox.style.marginLeft = <span class="hljs-number">0</span>;
+                oBox.style.left = iL+<span class="hljs-string">"px"</span>;
+                oBox.style.top = iT+<span class="hljs-string">"px"</span>;
+                aPos.push({x:iL,y:iT})
+                status();
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            };
+            <span class="hljs-comment">// 鼠标释放，结束拖拽</span>
+            <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-built_in">window</span>.onblur = oH2.onlosecapture = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                bDrag = <span class="hljs-literal">false</span>;
+                oH2.releaseCapture &amp;&amp; oH2.releaseCapture();
+                status()
+            };
+            <span class="hljs-comment">// 回放拖动轨迹</span>
+            oA.onclick= <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">if</span> (aPos.length==<span class="hljs-number">1</span>)<span class="hljs-keyword">return</span>;
+                <span class="hljs-keyword">var</span> timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                    <span class="hljs-keyword">var</span> oPos = aPos.pop() ;
+                    oPos?(oBox.style.left = oPos.x+<span class="hljs-string">"px"</span>,oBox.style.top = oPos.y+<span class="hljs-string">"px"</span>,status()):clearInterval(timer)
+                },<span class="hljs-number">30</span>);
+                <span class="hljs-keyword">this</span>.focus = <span class="hljs-literal">false</span>;<span class="hljs-comment">// 去除链接虚线</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+            };
+                <span class="hljs-comment">// 阻止冒泡</span>
+                oA.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+                    (event||<span class="hljs-built_in">window</span>.event).cancelBubble = ture
+                };
+                <span class="hljs-comment">// 监听状态函数</span>
+                <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">status</span>(<span class="hljs-params"></span>) </span>{
+                    aSpan[<span class="hljs-number">0</span>].innerHTML = bDrag;
+                    aSpan[<span class="hljs-number">1</span>].innerHTML = oBox.offsetTop;
+                    aSpan[<span class="hljs-number">2</span>],innerHTML = oBox.offsetLeft;
+
+                }
+                <span class="hljs-comment">// 初始调用</span>
+                status()
+            };
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>&gt;</span>点击回放拖动轨迹<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Drag:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>offsetTop:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>offsetLeft:<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="36225891" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="36225891" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

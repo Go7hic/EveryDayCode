@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>自动播放幻灯片练习 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>自动播放幻灯片练习</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html">&lt;!doctype html&gt;
+&lt;html lang=<span class="hljs-string">"en"</span>&gt;
+&lt;head&gt;
+    &lt;meta charset=<span class="hljs-string">"UTF-8"</span>&gt;
+    &lt;<span class="hljs-keyword">title</span>&gt;自动播放幻灯片练习&lt;/<span class="hljs-keyword">title</span>&gt;
+    &lt;style&gt;
+        body,div,ul,li {
+            margin: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            padding: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        }
+        ul {list-style: none<span class="hljs-comment">;}</span>
+        body {
+            background: <span class="hljs-meta">#ddd;</span>
+            text-align: center<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">font</span>-size: <span class="hljs-number">12</span>px<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">line</span>-height: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+        }
+        <span class="hljs-meta">#box {</span>
+            position: relative<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">width</span>: <span class="hljs-number">492</span>px<span class="hljs-comment">;</span>
+            height: <span class="hljs-number">172</span>px<span class="hljs-comment">;</span>
+            margin: <span class="hljs-number">10</span>px auto<span class="hljs-comment">;</span>
+            background: <span class="hljs-meta">#fff;</span>
+            -webkit-border-radius: <span class="hljs-number">3</span>px<span class="hljs-comment">;</span>
+            -moz-border-radius: <span class="hljs-number">3</span>px<span class="hljs-comment">;</span>
+            border-radius: <span class="hljs-number">3</span>px<span class="hljs-comment">;</span>
+            border: <span class="hljs-number">8</span>px solid <span class="hljs-meta">#fff;</span>
+        }
+        <span class="hljs-meta">#box .list {</span>
+            position: relative<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">width</span>: <span class="hljs-number">490</span>px<span class="hljs-comment">;</span>
+            height: <span class="hljs-number">170</span>px<span class="hljs-comment">;</span>
+            overflow: hidden<span class="hljs-comment">;</span>
+            border: <span class="hljs-number">1</span>px solid <span class="hljs-meta">#ccc;</span>
+
+        }
+        <span class="hljs-meta">#box .list li {</span>
+            position: absolute<span class="hljs-comment">;</span>
+            top: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            left: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            <span class="hljs-keyword">width</span>: <span class="hljs-number">490</span>px<span class="hljs-comment">;</span>
+            height: <span class="hljs-number">170</span>px<span class="hljs-comment">;</span>
+            opacity: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            filter: alpha(opacity=<span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+        }
+        <span class="hljs-meta">#box .list li.urrent {</span>
+            opacity: <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+            filter: alpha(opacity=<span class="hljs-number">100</span>)<span class="hljs-comment">;</span>
+        }
+        <span class="hljs-meta">#box .count {</span>
+            position: absolute<span class="hljs-comment">;</span>
+            right: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            bottom: <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        }
+        .count li {
+            float: left<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">width</span>: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+            height: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+            margin-right: <span class="hljs-number">5</span>px<span class="hljs-comment">;</span>
+            background-<span class="hljs-keyword">color</span>: <span class="hljs-meta">#f90;</span>
+            overflow: hidden<span class="hljs-comment">;</span>
+            -webkit-border-radius: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+            -moz-border-radius: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+            border-radius: <span class="hljs-number">20</span>px<span class="hljs-comment">;</span>
+            opacity: <span class="hljs-number">0.7</span><span class="hljs-comment">;</span>
+            filter: alpha(opacity=<span class="hljs-number">70</span><span class="hljs-comment">;);</span>
+            <span class="hljs-keyword">color</span>: <span class="hljs-meta">#fff;</span>
+            cursor: pointer
+
+        }
+        .count li.current {
+            <span class="hljs-keyword">color</span>: <span class="hljs-meta">#fff;</span>
+            opacity: <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+            filter: alpha(opacity=<span class="hljs-number">100</span>)<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">font</span>-weight: <span class="hljs-number">700</span><span class="hljs-comment">;</span>
+            background: <span class="hljs-meta">#f60;</span>
+        }
+        <span class="hljs-meta">#temp {</span>
+            position: absolute<span class="hljs-comment">;</span>
+            <span class="hljs-keyword">width</span>: <span class="hljs-number">100</span>px<span class="hljs-comment">;</span>
+            height: <span class="hljs-number">100</span>px<span class="hljs-comment">;</span>
+            background: red<span class="hljs-comment">;</span>
+        }
+    &lt;/style&gt;
+    &lt;script&gt;
+  window.onload = function () {
+    var oBox = document.getElementById(<span class="hljs-string">"box"</span>)<span class="hljs-comment">;</span>
+    var aUl = document.getElementsByTagName(<span class="hljs-string">"ul"</span>)<span class="hljs-comment">;</span>
+    var aImg = aUl[<span class="hljs-number">0</span>].getElementsByTagName(<span class="hljs-string">"li"</span>)<span class="hljs-comment">;</span>
+    var aNum = aUl[<span class="hljs-number">1</span>].getElementsByTagName(<span class="hljs-string">"li"</span>)<span class="hljs-comment">;</span>
+    var timer = play = null<span class="hljs-comment">;</span>
+    var i = index = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+
+    <span class="hljs-comment">//切换按钮</span>
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; aNum.length; i++) {</span>
+        aNum[i].index = i<span class="hljs-comment">;</span>
+        aNum[i].onmouseover = function ()
+        {
+            show(this.index)
+        }
+    }
+
+    <span class="hljs-comment">//鼠标划过关闭定时器</span>
+    oBox.onmouseover = function (){
+        clearInterval(play)
+    }<span class="hljs-comment">;</span>
+
+    <span class="hljs-comment">//鼠标离开启动自动播放</span>
+    oBox.onmouseout = function () {
+        autoPlay()
+    }<span class="hljs-comment">;</span>
+
+    <span class="hljs-comment">//自动播放函数</span>
+    function autoPlay () {
+        play = setInterval(function () {
+            index++<span class="hljs-comment">;</span>
+            index &gt;= aImg.<span class="hljs-keyword">length</span> &amp;&amp; (index = <span class="hljs-number">0</span>)<span class="hljs-comment">;</span>
+            show(index)<span class="hljs-comment">;</span>
+        },<span class="hljs-number">2000</span>)<span class="hljs-comment">;</span>
+    }
+    autoPlay()<span class="hljs-comment">;//应用</span>
+
+    <span class="hljs-comment">//图片切换, 淡入淡出效果</span>
+    function show (a) {
+        index = a<span class="hljs-comment">;</span>
+        var alpha = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; aNum.length; i++)aNum[i].className = "";</span>
+        aNum[index].className = <span class="hljs-string">"current"</span><span class="hljs-comment">;</span>
+        clearInterval(timer)<span class="hljs-comment">;</span>
+
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; aImg.length; i++) {</span>
+            aImg[i].style.opacity = <span class="hljs-number">0</span><span class="hljs-comment">;</span>
+            aImg[i].style.filter = <span class="hljs-string">"alpha(opacity=0)"</span><span class="hljs-comment">;</span>
+        }
+
+        timer = setInterval(function () {
+            alpha += <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+            alpha &gt; <span class="hljs-number">100</span> &amp;&amp; (alpha =<span class="hljs-number">100</span>)<span class="hljs-comment">;</span>
+            aImg[index].style.opacity = alpha / <span class="hljs-number">100</span><span class="hljs-comment">;</span>
+            aImg[index].style.filter = <span class="hljs-string">"alpha(opacity = "</span> + alpha + <span class="hljs-string">")"</span><span class="hljs-comment">;</span>
+            alpha == <span class="hljs-number">100</span> &amp;&amp; clearInterval(timer)
+        },<span class="hljs-number">20</span>)<span class="hljs-comment">;</span>
+    }
+}<span class="hljs-comment">;</span>
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=<span class="hljs-string">"box"</span>&gt;
+        &lt;ul class=<span class="hljs-string">"list"</span>&gt;
+            &lt;li&gt;&lt;img src=<span class="hljs-string">"http://a4.qpic.cn/psb?/3e11d331-9da9-46fb-82d6-66cab5d80870/PB5BHInHG8qnAfXy*w7xjb4*9M.QwEsr5ZTd7uoR2uU!/m/dECy9WVrIgAA&amp;bo=xAOAAkAGJwQBAAc!&amp;rf=0-18"</span>&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src=<span class="hljs-string">"http://a4.qpic.cn/psb?/3e11d331-9da9-46fb-82d6-66cab5d80870/PB5BHInHG8qnAfXy*w7xjb4*9M.QwEsr5ZTd7uoR2uU!/m/dECy9WVrIgAA&amp;bo=xAOAAkAGJwQBAAc!&amp;rf=0-18"</span>&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src=<span class="hljs-string">"http://a4.qpic.cn/psb?/3e11d331-9da9-46fb-82d6-66cab5d80870/PB5BHInHG8qnAfXy*w7xjb4*9M.QwEsr5ZTd7uoR2uU!/m/dECy9WVrIgAA&amp;bo=xAOAAkAGJwQBAAc!&amp;rf=0-18"</span>&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src=<span class="hljs-string">"http://a4.qpic.cn/psb?/3e11d331-9da9-46fb-82d6-66cab5d80870/PB5BHInHG8qnAfXy*w7xjb4*9M.QwEsr5ZTd7uoR2uU!/m/dECy9WVrIgAA&amp;bo=xAOAAkAGJwQBAAc!&amp;rf=0-18"</span>&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;img src=<span class="hljs-string">"http://a4.qpic.cn/psb?/3e11d331-9da9-46fb-82d6-66cab5d80870/PB5BHInHG8qnAfXy*w7xjb4*9M.QwEsr5ZTd7uoR2uU!/m/dECy9WVrIgAA&amp;bo=xAOAAkAGJwQBAAc!&amp;rf=0-18"</span>&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class=<span class="hljs-string">"count"</span>&gt;
+            &lt;li&gt;<span class="hljs-number">1</span>&lt;/li&gt;
+            &lt;li&gt;<span class="hljs-number">2</span>&lt;/li&gt;
+            &lt;li&gt;<span class="hljs-number">3</span>&lt;/li&gt;
+            &lt;li&gt;<span class="hljs-number">4</span>&lt;/li&gt;
+            &lt;li&gt;<span class="hljs-number">5</span>&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="35290592" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="35290592" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

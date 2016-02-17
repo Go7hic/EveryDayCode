@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js左右栏拖动的效果 - every day code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">every day code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js左右栏拖动的效果</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>左右拖动<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">body</span>,<span class="hljs-selector-tag">ul</span>,<span class="hljs-selector-tag">li</span>{
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-selector-id">#box</span> {
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">600px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#000</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> auto;
+        }
+        <span class="hljs-selector-id">#top</span>,<span class="hljs-selector-id">#bottom</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+        }
+        <span class="hljs-selector-id">#top</span> {
+            <span class="hljs-attribute">float</span>: left;
+            <span class="hljs-attribute">background-color</span>: green;
+        }
+        <span class="hljs-selector-id">#bottom</span> {<span class="hljs-attribute">float</span>: right; <span class="hljs-attribute">background-color</span>: blue;}
+        <span class="hljs-selector-id">#line</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">4px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            <span class="hljs-attribute">background-color</span>: red;
+            <span class="hljs-attribute">cursor</span>: w-resize;
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$</span>(<span class="hljs-params">id</span>) </span>{
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementById(id)
+        }
+        <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> oBox = $(<span class="hljs-string">"box"</span>), oTop = $(<span class="hljs-string">"top"</span>), oBottom = $(<span class="hljs-string">"bottom"</span>), oLine = $(<span class="hljs-string">"line"</span>);
+            oLine.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                <span class="hljs-keyword">var</span> disX = (e || event).clientX;
+                oLine.left = oLine.offsetLeft;
+                <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+                    <span class="hljs-keyword">var</span> iT = oLine.left + ((e || event).clientX - disX);
+                    <span class="hljs-keyword">var</span> e=e||<span class="hljs-built_in">window</span>.event,tarnameb=e.target||e.srcElement;
+                    <span class="hljs-keyword">var</span> maxT = oBox.clientWight - oLine.offsetWidth;
+                    oLine.style.margin = <span class="hljs-number">0</span>;
+                    iT &lt; <span class="hljs-number">0</span> &amp;&amp; (iT = <span class="hljs-number">0</span>);
+                    iT &gt; maxT &amp;&amp; (iT = maxT);
+                    oLine.style.left = oTop.style.width = iT + <span class="hljs-string">"px"</span>;
+                    oBottom.style.width = oBox.clientWidth - iT + <span class="hljs-string">"px"</span>;
+                    $(<span class="hljs-string">"msg"</span>).innerText=<span class="hljs-string">'top.width:'</span>+oLine.style.width+<span class="hljs-string">'---bottom.width:'</span>+oBottom.style.width+<span class="hljs-string">'---oLine.offsetLeft:'</span>+oLine.offsetLeft+<span class="hljs-string">'---disX:'</span>+disX+<span class="hljs-string">'---tarnameb:'</span>+tarnameb.tagName;
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+                };
+                <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                    <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-literal">null</span>;
+                    <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span>;
+                    oLine.releaseCapture &amp;&amp; oLine.releaseCapture()
+                };
+                oLine.setCapture &amp;&amp; oLine.setCapture();
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+            };
+        };
+
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"top"</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit itaque nihil eligendi quisquam beatae asperiores quam animi repellat blanditiis placeat corporis, enim vero numquam, magni officia praesentium ducimus mollitia amet.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"bottom"</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit esse facere numquam impedit quisquam unde atque, dignissimos soluta ratione earum ut ea rerum voluptatem obcaecati, corporis illum accusamus quasi consectetur.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"line"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="36238704" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="36238704" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 every day code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>
