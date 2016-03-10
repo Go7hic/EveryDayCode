@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Wed, 17 Feb 2016 13:35:12 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 17 Feb 2016 13:35:12 GMT</pubDate><item><title><![CDATA[JS 求中位数]]></title><description><![CDATA[<pre><code>function getMedian(arr) {
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Thu, 10 Mar 2016 11:45:27 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 10 Mar 2016 11:45:27 GMT</pubDate><item><title><![CDATA[css 实现 0.5 px 的 border]]></title><description><![CDATA[<p>在做手机页面的时候，有时候需要模仿原生的那种 1px 下划线的效果，普通的 css 1px 看起来比原生的粗，所以我们可以考虑实现 0.5px 的border 来实现这个效果，因为只有少数的设备才支持 0.5px 这个属性值，所以我们只能通过其他办法来实现，比如：</p>
+<pre><code>&lt;div class=&quot;btn&quot;&gt;.5px border&lt;/div&gt;
+</code></pre><pre><code> .btn {
+        position: relative;
+        width: 200px;
+        height: 42px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 42px;
+        background-color: #ededed;
+      }
+      .btn:before {
+        content: &quot;&quot;;
+        position: absolute;
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        border-style: solid;
+        border-width: 1px;
+        border-color: red;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+      }
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/03/137603492.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/03/137603492.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Mon, 07 Mar 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[对象转数组]]></title><description><![CDATA[<pre><code>var a = [{b: &#39;1&#39;,c: &#39;2&#39;}];
+Object.keys(a).map(function (key) {
+    return {key : key,value: a[key]}
+})
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/02/137045132.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/02/137045132.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 27 Feb 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[JS 求中位数]]></title><description><![CDATA[<pre><code>function getMedian(arr) {
     var len = arr.length;
     arr.sort(function (a,b) {
         return (a-b);
