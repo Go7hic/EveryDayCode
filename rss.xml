@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Thu, 10 Mar 2016 11:45:27 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 10 Mar 2016 11:45:27 GMT</pubDate><item><title><![CDATA[css 实现 0.5 px 的 border]]></title><description><![CDATA[<p>在做手机页面的时候，有时候需要模仿原生的那种 1px 下划线的效果，普通的 css 1px 看起来比原生的粗，所以我们可以考虑实现 0.5px 的border 来实现这个效果，因为只有少数的设备才支持 0.5px 这个属性值，所以我们只能通过其他办法来实现，比如：</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Sat, 16 Apr 2016 03:33:15 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 16 Apr 2016 03:33:15 GMT</pubDate><item><title><![CDATA[js 避免连续点击事件]]></title><description><![CDATA[<p>方法一：</p>
+<pre><code class="lang-js">var lock=false,time=2*1000;
+addEvent(node,&#39;click&#39;,function(){
+  if(lock){return;}//如果未解锁直接return；
+  lock=true;//锁定
+  setTimeout(function(){//2秒后解锁
+    lock=false;
+  },time);
+  //这里写你要做的事
+  .......
+});
+</code></pre>
+<p>如果2秒内点击两次，会直接return；2秒后解锁才可继续点击</p>
+<p>方法2：</p>
+<pre><code class="lang-js">var lockChecker,time=2*1000;
+addEvent(node,&#39;click&#39;,function(){
+  clearTimeout(lockChecker);//把上一次点击产生的timeout清除掉
+  lockChecker=setTimeout(function(){//设置一个新的timeout，2秒后才执行
+    //这里写你要做的事
+    ......
+  },time);
+});
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/04/148421106.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/04/148421106.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Fri, 15 Apr 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 实现斐波那契数列]]></title><description><![CDATA[<p>在数学上，费波那契数列是以递归的方法来定义：</p>
+<blockquote>
+<p>F_0=0
+F_1=1
+F<em>n = F</em>{n-1}+ F_{n-2}（n≧2）</p>
+</blockquote>
+<p>用文字来说，就是费波那契数列由0和1开始，之后的费波那契系数就由之前的两数相加</p>
+<p>用 js 通过递归来实现，代码如下：</p>
+<pre><code>function fib(num) {
+  if (num === 1 || num === 2) return 1
+  return fib(num-1)+fib(num-2)
+}
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/03/143722538.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/03/143722538.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Wed, 13 Apr 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[css 实现 0.5 px 的 border]]></title><description><![CDATA[<p>在做手机页面的时候，有时候需要模仿原生的那种 1px 下划线的效果，普通的 css 1px 看起来比原生的粗，所以我们可以考虑实现 0.5px 的border 来实现这个效果，因为只有少数的设备才支持 0.5px 这个属性值，所以我们只能通过其他办法来实现，比如：</p>
 <pre><code>&lt;div class=&quot;btn&quot;&gt;.5px border&lt;/div&gt;
 </code></pre><pre><code> .btn {
         position: relative;

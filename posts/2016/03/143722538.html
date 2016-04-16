@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js 实现斐波那契数列 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js 实现斐波那契数列</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Apr 14, 2016</p>
+
+    <div class="content"><p>在数学上，费波那契数列是以递归的方法来定义：</p>
+<blockquote>
+<p>F_0=0
+F_1=1
+F<em>n = F</em>{n-1}+ F_{n-2}（n≧2）</p>
+</blockquote>
+<p>用文字来说，就是费波那契数列由0和1开始，之后的费波那契系数就由之前的两数相加</p>
+<p>用 js 通过递归来实现，代码如下：</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-title">num</span>) {</span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">num</span> === <span class="hljs-number">1</span> || <span class="hljs-built_in">num</span> === <span class="hljs-number">2</span>) <span class="hljs-literal">return</span> <span class="hljs-number">1</span>
+  <span class="hljs-literal">return</span> fib(<span class="hljs-built_in">num</span><span class="hljs-number">-1</span>)+fib(<span class="hljs-built_in">num</span><span class="hljs-number">-2</span>)
+}
+</code></pre></div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="143722538" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="143722538" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>
