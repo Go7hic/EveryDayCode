@@ -1,4 +1,391 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Sat, 16 Apr 2016 03:33:15 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 16 Apr 2016 03:33:15 GMT</pubDate><item><title><![CDATA[js 避免连续点击事件]]></title><description><![CDATA[<p>方法一：</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Every Day Code]]></title><description><![CDATA[Every Day Code]]></description><link>http://code.yongyuan.us</link><generator>RSS for Node</generator><lastBuildDate>Mon, 10 Oct 2016 15:59:23 GMT</lastBuildDate><atom:link href="http://code.yongyuan.us/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 10 Oct 2016 15:59:23 GMT</pubDate><item><title><![CDATA[JS 判断浏览器支不支持 ES6]]></title><description><![CDATA[<pre><code class="lang-js">var supportsES6 = function() {
+  try {
+    new Function(&quot;(a = 0) =&gt; a&quot;);
+    return true;
+  }
+  catch (err) {
+    return false;
+  }
+}();
+</code></pre>
+<h4 id="usage">usage</h4>
+<pre><code>if (supportsES6) {
+  var script = document.createElement(&quot;script&quot;);
+  script.src = &quot;my-es6-file.js&quot;;
+  document.head.appendChild(script);
+}
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/10/181937859.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181937859.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 09 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 16进制颜色值转 RGB]]></title><description><![CDATA[<pre><code class="lang-js">const toRGB = (() =&gt; {
+  const expand = hex =&gt;
+    hex.length &lt; 7 ? hex.split(&quot;&quot;).reduce((a, b) =&gt; a + b + b) : hex;
+  const convert = hex =&gt;
+    hex.match(/[\d\w]{2}/g).map(val =&gt; parseInt(val, 16));
+  return hex =&gt; {
+    const [r, g, b] = convert(expand(hex));
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+})();
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/10/181925772.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181925772.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 09 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 生成随机的颜色值]]></title><description><![CDATA[<pre><code class="lang-js">const randomColor = (() =&gt; {
+  &quot;use strict&quot;;
+
+  const randomInt = (min, max) =&gt; {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  return () =&gt; {
+    var h = randomInt(0, 360);
+    var s = randomInt(42, 98);
+    var l = randomInt(40, 90);
+    return `hsl(${h},${s}%,${l}%)`;
+  };
+})();
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/10/181925647.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181925647.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 09 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[javascript HSL 和 RGB, HSV 和 RGB 互相转换]]></title><description><![CDATA[<pre><code class="lang-js">/**
+ * Converts an RGB color value to HSL. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and l in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSL representation
+ */
+function rgbToHsl(r, g, b){
+    r /= 255, g /= 255, b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+
+    if(max == min){
+        h = s = 0; // achromatic
+    }else{
+        var d = max - min;
+        s = l &gt; 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch(max){
+            case r: h = (g - b) / d + (g &lt; b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [h, s, l];
+}
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  l       The lightness
+ * @return  Array           The RGB representation
+ */
+function hslToRgb(h, s, l){
+    var r, g, b;
+
+    if(s == 0){
+        r = g = b = l; // achromatic
+    }else{
+        function hue2rgb(p, q, t){
+            if(t &lt; 0) t += 1;
+            if(t &gt; 1) t -= 1;
+            if(t &lt; 1/6) return p + (q - p) * 6 * t;
+            if(t &lt; 1/2) return q;
+            if(t &lt; 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        var q = l &lt; 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [r * 255, g * 255, b * 255];
+}
+
+/**
+ * Converts an RGB color value to HSV. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and v in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSV representation
+ */
+function rgbToHsv(r, g, b){
+    r = r/255, g = g/255, b = b/255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, v = max;
+
+    var d = max - min;
+    s = max == 0 ? 0 : d / max;
+
+    if(max == min){
+        h = 0; // achromatic
+    }else{
+        switch(max){
+            case r: h = (g - b) / d + (g &lt; b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+
+    return [h, s, v];
+}
+
+/**
+ * Converts an HSV color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes h, s, and v are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  v       The value
+ * @return  Array           The RGB representation
+ */
+function hsvToRgb(h, s, v){
+    var r, g, b;
+
+    var i = Math.floor(h * 6);
+    var f = h * 6 - i;
+    var p = v * (1 - s);
+    var q = v * (1 - f * s);
+    var t = v * (1 - (1 - f) * s);
+
+    switch(i % 6){
+        case 0: r = v, g = t, b = p; break;
+        case 1: r = q, g = v, b = p; break;
+        case 2: r = p, g = v, b = t; break;
+        case 3: r = p, g = q, b = v; break;
+        case 4: r = t, g = p, b = v; break;
+        case 5: r = v, g = p, b = q; break;
+    }
+
+    return [r * 255, g * 255, b * 255];
+}
+</code></pre>
+<p>参考 <a href="http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c">http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c</a></p>
+]]></description><link>http://code.yongyuan.us/posts/2016/10/181925564.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181925564.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 09 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[一个简单的 DOM 选择器功能]]></title><description><![CDATA[<pre><code class="lang-js">function fastSelect(selector) {
+  if (selector == &quot;body&quot;) {
+    return document.body
+  } else if (selector == &quot;head&quot;) {
+    return document.head
+  } else if (/^[\#.]?[\w-]+$/.test(selector)) {
+    switch (selector[0]) {
+      case &quot;#&quot;:
+        return document.getElementById(selector.slice(1))
+      case &quot;.&quot;:
+        return document.getElementsByClassName(selector.slice(1))
+      default:
+        return document.getElementsByTagName(selector)
+    }
+  }
+  return document.querySelectorAll(selector)
+}
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/10/181892507.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181892507.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 09 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[JS 获取服务器时间]]></title><description><![CDATA[<p>JS 一般通过 new Date() 来获取当前时间，但有时候我们需要的是服务端时间，有个很简单的办法获取服务器时间：</p>
+<pre><code>var req = new XMLHttpRequest();
+req.open(&#39;GET&#39;, location, false);
+req.send(null);
+console.log(req.getResponseHeader(&#39;Date&#39;)); 
+//VM2669:4 Fri, 07 Oct 2016 15:12:25 GMT
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/10/181695703.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/10/181695703.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Thu, 06 Oct 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[纯 CS S实现 img zoom 效果]]></title><description><![CDATA[<p>先看效果：
+<a href="https://jsfiddle.net/gothic/6jzj01u1/">https://jsfiddle.net/gothic/6jzj01u1/</a></p>
+<p>具体代码：</p>
+<pre><code class="lang-html">    &lt;header class=&quot;header&quot;&gt;
+      &lt;h1 class=&quot;header-title&quot;&gt;Image Zoom on Hover&lt;/h1&gt;
+    &lt;/header&gt;
+
+    &lt;section class=&quot;wrapper&quot;&gt;
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;https://media.timeout.com/images/101602611/image.jpg&quot; alt=&quot;&quot; class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;Los Angeles&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;http://s1.it.atcdn.net/wp-content/uploads/2015/08/2-London.jpg&quot; alt=&quot;&quot; class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;London&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;https://media.timeout.com/images/101484105/image.jpg&quot; alt=&quot;&quot; class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;New York&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Hollywood_Sign.jpg/1280px-Hollywood_Sign.jpg&quot; alt=&quot;&quot;
+          class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;Hollywood&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;http://www.travelandleisure.com/sites/default/files/styles/tnl_redesign_article_landing_page/public/1453920892/DUBAI-554088081-ABOVE0116.jpg?itok=dcoZnCrc&quot;
+          alt=&quot;&quot; class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;Dubai&lt;/span&gt;
+      &lt;/a&gt;
+
+      &lt;a href=&quot;#&quot; class=&quot;tile&quot;&gt;
+        &lt;img src=&quot;http://blog.whitepages.com/wp-content/uploads/2015/04/san-franc.jpg&quot; alt=&quot;&quot; class=&quot;tile-media&quot;&gt;
+        &lt;span class=&quot;tile-content&quot;&gt;San Francisco&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/section&gt;
+</code></pre>
+<pre><code class="lang-css"> .tile {
+        width: 100%;
+        height: 300px;
+        margin: 0.5rem auto;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        float: left;
+
+      }
+       .title::after {
+          content: &quot;&quot;;
+          position: absolute;
+          background-color: rgba(52, 73, 94, 0.75);
+          width: 100%;
+          height: 100%;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0.5s, opacity 0.5s;
+        }
+
+      .tile:hover::after,
+      .tile:focus::after {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .tile-media {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s;
+        transform: scale(1);
+        backface-visibility: hidden;
+      }
+
+      .tile:hover .tile-media,
+      .tile:focus .tile-media {
+        transform: scale(1.2);
+      }
+
+      .tile-content {
+        top: 50%;
+        right: 0;
+        left: 0;
+        position: absolute;
+        z-index: 1;
+        visibility: hidden;
+        opacity: 0;
+        color: #fff;
+        font-size: 3rem;
+        transition: visibility 0.5s, opacity 0.5s;
+        transform: translateY(-50%);
+        backface-visibility: hidden;
+        text-align: center;
+      }
+
+      .tile:hover .tile-content,
+      .tile:focus .tile-content {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      @media screen and (min-width: 64em) {
+        .tile {
+          width: calc(50% - 2rem);
+          margin: 1rem;
+        }
+      }
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/08/171343217.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/08/171343217.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 06 Sep 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[ES6 的方法来判断 0.1+0.2 == 0.3 ]]></title><description><![CDATA[<p>0.1+0.2==0.3</p>
+<p>在数学上来说是正确的，但是在 JS 里面这个确是不等的。这是由于JS 的浮点数精度问题，所以一直以来人们也是用了很多办法来判断0.1+0.2==0.3 的问题。</p>
+<p>但是现在 ES6 Number 的一个新特性 EPSILON 解决了这个问题。Number.EPSILON 是一个静态属，直接用就可以。引入一个这么小的常量的目的，在于为浮点数计算，设置一个误差范围，如果计算两个数的误差能够小于Number.EPSILON，我们就可以认为得到了正确结果。</p>
+<p>所以现在可以这么简单的判断 0.1+0.2 == 0.3 了：</p>
+<pre><code class="lang-js">function numbersCloseEnoughToEqual(n1,n2) {
+  return Math.abs( n1 - n2 ) &lt; Number.EPSILON;
+}
+</code></pre>
+<pre><code>numbersCloseEnoughToEqual(0.1+0.2,0.3)
+=&gt; true
+</code></pre>]]></description><link>http://code.yongyuan.us/posts/2016/08/171213294.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/08/171213294.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sun, 14 Aug 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[提前某字符串里的所有元音字母]]></title><description><![CDATA[<pre><code class="lang-js">function vowels(str) {
+    let matches
+    if (str &amp;&amp; (matches = str.match(/[aeiou]/g))) {
+     return matches
+   }
+}
+</code></pre>
+<p>vowels(&#39;hello&#39;) // [&quot;e&quot;, &quot;o&quot;]</p>
+]]></description><link>http://code.yongyuan.us/posts/2016/08/171042378.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/08/171042378.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Sat, 13 Aug 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[css 隐藏元素 集合]]></title><description><![CDATA[<pre><code class="lang-css">{ display: none; /* 不占据空间，无法点击 */ }
+
+{ visibility: hidden; /* 占据空间，无法点击 */ }
+
+{ position: absolute; clip:rect(1px 1px 1px 1px); /* 不占据空间，无法点击 */ }
+
+{ position: absolute; top: -999em; /* 不占据空间，无法点击 */ }
+
+{ position: relative; top: -999em; /* 占据空间，无法点击 */ }
+
+{ position: absolute; visibility: hidden; /* 不占据空间，无法点击 */ }
+
+{ height: 0; overflow: hidden; /* 不占据空间，无法点击 */ }
+
+{ opacity: 0; filter:Alpha(opacity=0); /* 占据空间，可以点击 */ }
+
+{ position: absolute; opacity: 0; filter:Alpha(opacity=0); /* 不占据空间，可以点击 */ }
+
+{
+    zoom: 0.001;
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    /* IE6/IE7/IE9不占据空间，IE8/FireFox/Chrome/Opera占据空间。都无法点击 */
+}
+{
+    position: absolute;
+    zoom: 0.001;
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0); 
+    /* 不占据空间，无法点击 */
+}
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/07/167778298.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/07/167778298.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Tue, 26 Jul 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[简单的实现 数组 range 功能]]></title><description><![CDATA[<pre><code class="lang-js">const range = (start, end) =&gt; (
+  Array.from({ length: end - start + 1 }, (x, i) =&gt; i + start)
+);
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/06/163175347.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/06/163175347.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Wed, 29 Jun 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[css 自定义下划线]]></title><description><![CDATA[<p>主要是通过 css 背景渐变实现对指定文字下划线。</p>
+<p>&lt;script async src=&quot;//jsfiddle.net/d5mrv7vz/1/embed/&quot;&gt;&lt;/script&gt;
+
+</p>
+<pre><code class="lang-html">&lt;p&gt;Lorem &lt;span&gt;kkkkkkkdhgjllll&lt;/span&gt;ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quos accusamus officiis, distinctio eaque ipsam nostrum, omnis quibusdam, quis, expedita vel unde tempora eligaendi excepturi ipsum numquam odit iure qui!&lt;/p&gt;
+
+p {
+  background: linear-gradient(90deg,gray 66%, transparent 0) repeat-x;
+background-size: .2em 2px;
+background-position: 0 1em;
+word-break: break-all;
+}
+</code></pre>
+]]></description><link>http://code.yongyuan.us/posts/2016/04/148856040.html</link><guid isPermaLink="true">http://code.yongyuan.us/posts/2016/04/148856040.html</guid><dc:creator><![CDATA[dyygtfx]]></dc:creator><pubDate>Fri, 15 Apr 2016 16:00:00 GMT</pubDate></item><item><title><![CDATA[js 避免连续点击事件]]></title><description><![CDATA[<p>方法一：</p>
 <pre><code class="lang-js">var lock=false,time=2*1000;
 addEvent(node,&#39;click&#39;,function(){
   if(lock){return;}//如果未解锁直接return；

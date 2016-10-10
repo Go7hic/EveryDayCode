@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>css 自定义下划线 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>css 自定义下划线</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Apr 16, 2016</p>
+
+    <div class="content"><p>主要是通过 css 背景渐变实现对指定文字下划线。</p>
+<p>&lt;script async src=&quot;//jsfiddle.net/d5mrv7vz/1/embed/&quot;&gt;&lt;/script&gt;
+
+</p>
+<pre><code class="lang-html">&lt;p&gt;Lo<span class="hljs-comment">rem &lt;span&gt;kkkkkkkdhgjllll&lt;/span&gt;ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate quos accusamus officiis, distinctio eaque ipsam nostrum, omnis quibusdam, quis, expedita vel unde tempora eligaendi excepturi ipsum numquam odit iure qui!&lt;/p&gt;</span>
+
+p {
+<span class="hljs-function">  background: <span class="hljs-title">linear</span>-<span class="hljs-title">gradient</span>(90<span class="hljs-title">deg</span>,<span class="hljs-title">gray</span> 66%, <span class="hljs-title">transparent</span> 0) <span class="hljs-title">repeat</span>-<span class="hljs-title">x</span>;
+<span class="hljs-title">background</span>-<span class="hljs-title">size</span>: .2<span class="hljs-title">em</span> 2<span class="hljs-title">px</span>;
+<span class="hljs-title">background</span>-<span class="hljs-title">position</span>: 0 1<span class="hljs-title">em</span>;
+<span class="hljs-title">word</span>-<span class="hljs-title">break</span>: <span class="hljs-title">break</span>-<span class="hljs-title">all</span>;
+}</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/HTML + CSS/">#HTML + CSS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="148856040" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="148856040" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>一个简单的 DOM 选择器功能 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>一个简单的 DOM 选择器功能</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Oct 10, 2016</p>
+
+    <div class="content"><pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fastSelect</span>(<span class="hljs-params">selector</span>) </span>{
+  <span class="hljs-keyword">if</span> (selector == <span class="hljs-string">"body"</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.body
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (selector == <span class="hljs-string">"head"</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.head
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/^[\#.]?[\w-]+$/</span>.test(selector)) {
+    <span class="hljs-keyword">switch</span> (selector[<span class="hljs-number">0</span>]) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">"#"</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementById(selector.slice(<span class="hljs-number">1</span>))
+      <span class="hljs-keyword">case</span> <span class="hljs-string">"."</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementsByClassName(selector.slice(<span class="hljs-number">1</span>))
+      <span class="hljs-keyword">default</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementsByTagName(selector)
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.querySelectorAll(selector)
+}
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="181892507" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="181892507" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

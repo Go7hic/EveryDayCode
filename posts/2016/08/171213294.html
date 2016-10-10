@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>ES6 的方法来判断 0.1+0.2 == 0.3  - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>ES6 的方法来判断 0.1+0.2 == 0.3 </h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Aug 15, 2016</p>
+
+    <div class="content"><p>0.1+0.2==0.3</p>
+<p>在数学上来说是正确的，但是在 JS 里面这个确是不等的。这是由于JS 的浮点数精度问题，所以一直以来人们也是用了很多办法来判断0.1+0.2==0.3 的问题。</p>
+<p>但是现在 ES6 Number 的一个新特性 EPSILON 解决了这个问题。Number.EPSILON 是一个静态属，直接用就可以。引入一个这么小的常量的目的，在于为浮点数计算，设置一个误差范围，如果计算两个数的误差能够小于Number.EPSILON，我们就可以认为得到了正确结果。</p>
+<p>所以现在可以这么简单的判断 0.1+0.2 == 0.3 了：</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span></span> numbersCloseEnoughToEqual(n1,n2) {
+  <span class="hljs-keyword">return</span> Math.<span class="hljs-built_in">abs</span>( n1 - n2 ) &lt; <span class="hljs-keyword">Number</span>.<span class="hljs-built_in">EPSILON</span>;
+}
+</code></pre>
+<pre><code><span class="hljs-function"><span class="hljs-title">numbersCloseEnoughToEqual</span><span class="hljs-params">(<span class="hljs-number">0.1</span>+<span class="hljs-number">0.2</span>,<span class="hljs-number">0.3</span>)</span></span>
+=&gt; true
+</code></pre></div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="171213294" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="171213294" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>
