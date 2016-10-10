@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>javascript HSL 和 RGB, HSV 和 RGB 互相转换 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>javascript HSL 和 RGB, HSV 和 RGB 互相转换</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Oct 10, 2016</p>
+
+    <div class="content"><pre><code class="lang-js"><span class="hljs-comment">/**
+ * Converts an RGB color value to HSL. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and l in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSL representation
+ */</span>
+function rgbToHsl(r, <span class="hljs-keyword">g</span>, b){
+    r /= 255, <span class="hljs-keyword">g</span> /= 255, b /= 255;
+    <span class="hljs-keyword">var</span> max = Math.<span class="hljs-built_in">max</span>(r, <span class="hljs-keyword">g</span>, b), min = Math.<span class="hljs-built_in">min</span>(r, <span class="hljs-keyword">g</span>, b);
+    <span class="hljs-keyword">var</span> <span class="hljs-keyword">h</span>, s, <span class="hljs-keyword">l</span> = (max + min) / 2;
+
+    <span class="hljs-keyword">if</span>(max == min){
+        <span class="hljs-keyword">h</span> = s = 0; <span class="hljs-comment">// achromatic</span>
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">var</span> <span class="hljs-keyword">d</span> = max - min;
+        s = <span class="hljs-keyword">l</span> &gt; 0.5 ? <span class="hljs-keyword">d</span> / (2 - max - min) : <span class="hljs-keyword">d</span> / (max + min);
+        switch(max){
+            case r: <span class="hljs-keyword">h</span> = (<span class="hljs-keyword">g</span> - b) / <span class="hljs-keyword">d</span> + (<span class="hljs-keyword">g</span> &lt; b ? 6 : 0); <span class="hljs-keyword">break</span>;
+            case <span class="hljs-keyword">g</span>: <span class="hljs-keyword">h</span> = (b - r) / <span class="hljs-keyword">d</span> + 2; <span class="hljs-keyword">break</span>;
+            case b: <span class="hljs-keyword">h</span> = (r - <span class="hljs-keyword">g</span>) / <span class="hljs-keyword">d</span> + 4; <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">h</span> /= 6;
+    }
+
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">h</span>, s, <span class="hljs-keyword">l</span>];
+}
+
+<span class="hljs-comment">/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  l       The lightness
+ * @return  Array           The RGB representation
+ */</span>
+function hslToRgb(<span class="hljs-keyword">h</span>, s, <span class="hljs-keyword">l</span>){
+    <span class="hljs-keyword">var</span> r, <span class="hljs-keyword">g</span>, b;
+
+    <span class="hljs-keyword">if</span>(s == 0){
+        r = <span class="hljs-keyword">g</span> = b = <span class="hljs-keyword">l</span>; <span class="hljs-comment">// achromatic</span>
+    }<span class="hljs-keyword">else</span>{
+        function hue2rgb(p, q, t){
+            <span class="hljs-keyword">if</span>(t &lt; 0) t += 1;
+            <span class="hljs-keyword">if</span>(t &gt; 1) t -= 1;
+            <span class="hljs-keyword">if</span>(t &lt; 1/6) <span class="hljs-keyword">return</span> p + (q - p) * 6 * t;
+            <span class="hljs-keyword">if</span>(t &lt; 1/2) <span class="hljs-keyword">return</span> q;
+            <span class="hljs-keyword">if</span>(t &lt; 2/3) <span class="hljs-keyword">return</span> p + (q - p) * (2/3 - t) * 6;
+            <span class="hljs-keyword">return</span> p;
+        }
+
+        <span class="hljs-keyword">var</span> q = <span class="hljs-keyword">l</span> &lt; 0.5 ? <span class="hljs-keyword">l</span> * (1 + s) : <span class="hljs-keyword">l</span> + s - <span class="hljs-keyword">l</span> * s;
+        <span class="hljs-keyword">var</span> p = 2 * <span class="hljs-keyword">l</span> - q;
+        r = hue2rgb(p, q, <span class="hljs-keyword">h</span> + 1/3);
+        <span class="hljs-keyword">g</span> = hue2rgb(p, q, <span class="hljs-keyword">h</span>);
+        b = hue2rgb(p, q, <span class="hljs-keyword">h</span> - 1/3);
+    }
+
+    <span class="hljs-keyword">return</span> [r * 255, <span class="hljs-keyword">g</span> * 255, b * 255];
+}
+
+<span class="hljs-comment">/**
+ * Converts an RGB color value to HSV. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes r, g, and b are contained in the set [0, 255] and
+ * returns h, s, and v in the set [0, 1].
+ *
+ * @param   Number  r       The red color value
+ * @param   Number  g       The green color value
+ * @param   Number  b       The blue color value
+ * @return  Array           The HSV representation
+ */</span>
+function rgbToHsv(r, <span class="hljs-keyword">g</span>, b){
+    r = r/255, <span class="hljs-keyword">g</span> = <span class="hljs-keyword">g</span>/255, b = b/255;
+    <span class="hljs-keyword">var</span> max = Math.<span class="hljs-built_in">max</span>(r, <span class="hljs-keyword">g</span>, b), min = Math.<span class="hljs-built_in">min</span>(r, <span class="hljs-keyword">g</span>, b);
+    <span class="hljs-keyword">var</span> <span class="hljs-keyword">h</span>, s, v = max;
+
+    <span class="hljs-keyword">var</span> <span class="hljs-keyword">d</span> = max - min;
+    s = max == 0 ? 0 : <span class="hljs-keyword">d</span> / max;
+
+    <span class="hljs-keyword">if</span>(max == min){
+        <span class="hljs-keyword">h</span> = 0; <span class="hljs-comment">// achromatic</span>
+    }<span class="hljs-keyword">else</span>{
+        switch(max){
+            case r: <span class="hljs-keyword">h</span> = (<span class="hljs-keyword">g</span> - b) / <span class="hljs-keyword">d</span> + (<span class="hljs-keyword">g</span> &lt; b ? 6 : 0); <span class="hljs-keyword">break</span>;
+            case <span class="hljs-keyword">g</span>: <span class="hljs-keyword">h</span> = (b - r) / <span class="hljs-keyword">d</span> + 2; <span class="hljs-keyword">break</span>;
+            case b: <span class="hljs-keyword">h</span> = (r - <span class="hljs-keyword">g</span>) / <span class="hljs-keyword">d</span> + 4; <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">h</span> /= 6;
+    }
+
+    <span class="hljs-keyword">return</span> [<span class="hljs-keyword">h</span>, s, v];
+}
+
+<span class="hljs-comment">/**
+ * Converts an HSV color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+ * Assumes h, s, and v are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   Number  h       The hue
+ * @param   Number  s       The saturation
+ * @param   Number  v       The value
+ * @return  Array           The RGB representation
+ */</span>
+function hsvToRgb(<span class="hljs-keyword">h</span>, s, v){
+    <span class="hljs-keyword">var</span> r, <span class="hljs-keyword">g</span>, b;
+
+    <span class="hljs-keyword">var</span> i = Math.<span class="hljs-built_in">floor</span>(<span class="hljs-keyword">h</span> * 6);
+    <span class="hljs-keyword">var</span> f = <span class="hljs-keyword">h</span> * 6 - i;
+    <span class="hljs-keyword">var</span> p = v * (1 - s);
+    <span class="hljs-keyword">var</span> q = v * (1 - f * s);
+    <span class="hljs-keyword">var</span> t = v * (1 - (1 - f) * s);
+
+    switch(i % 6){
+        case 0: r = v, <span class="hljs-keyword">g</span> = t, b = p; <span class="hljs-keyword">break</span>;
+        case 1: r = q, <span class="hljs-keyword">g</span> = v, b = p; <span class="hljs-keyword">break</span>;
+        case 2: r = p, <span class="hljs-keyword">g</span> = v, b = t; <span class="hljs-keyword">break</span>;
+        case 3: r = p, <span class="hljs-keyword">g</span> = q, b = v; <span class="hljs-keyword">break</span>;
+        case 4: r = t, <span class="hljs-keyword">g</span> = p, b = v; <span class="hljs-keyword">break</span>;
+        case 5: r = v, <span class="hljs-keyword">g</span> = p, b = q; <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-keyword">return</span> [r * 255, <span class="hljs-keyword">g</span> * 255, b * 255];
+}
+</code></pre>
+<p>参考 <a href="http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c">http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c</a></p>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="181925564" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="181925564" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

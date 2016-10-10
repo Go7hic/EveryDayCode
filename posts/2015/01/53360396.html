@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>类似天猫购物车抛物线的效果 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>类似天猫购物车抛物线的效果</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html"> &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"start"</span>&gt;
+
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"end"</span>&gt;
+    &lt;span&gt;购物车&lt;/span&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+</code></pre>
+<pre><code class="lang-css">* {<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;<span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;}
+        <span class="hljs-selector-class">.start</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;
+            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50%</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#f00</span>;
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">200px</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">300px</span>;
+        }
+        <span class="hljs-selector-class">.end</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">background</span>: black;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">1000px</span>;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+
+        }
+        <span class="hljs-selector-class">.end</span> <span class="hljs-selector-tag">span</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">20px</span>;
+            <span class="hljs-attribute">display</span>: inline-block;
+            <span class="hljs-attribute">color</span>: red;
+        }
+</code></pre>
+<pre><code class="lang-js"> <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"jquery-2.1.1.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+    <span class="hljs-comment">// 插件</span>
+    (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> _$ = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(_this)</span> </span>{
+        <span class="hljs-keyword">return</span> _this.constructor == jQuery ? _this : $(_this);
+    };
+    <span class="hljs-comment">// 获取当前时间</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">now</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> +<span class="hljs-keyword">new</span> Date();
+    }
+
+    <span class="hljs-comment">// 转化为整数</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toInteger</span><span class="hljs-params">(text)</span> </span>{
+        text = parseInt(text);
+        <span class="hljs-keyword">return</span> isFinite(text) ? text : <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-keyword">var</span> Parabola = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
+        <span class="hljs-keyword">this</span>.initialize(options);
+    };
+    Parabola.prototype = {
+        constructor: Parabola,
+        <span class="hljs-comment">/**
+         * 初始化
+         * @classDescription 初始化
+         * @param {Object} options 插件配置 .
+         */</span>
+        initialize: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
+            <span class="hljs-keyword">this</span>.options = <span class="hljs-keyword">this</span>.options || <span class="hljs-keyword">this</span>.getOptions(options);
+            <span class="hljs-keyword">var</span> ops = <span class="hljs-keyword">this</span>.options;
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.options.el) {
+                <span class="hljs-keyword">return</span>;
+            }
+            <span class="hljs-keyword">this</span>.$el = _$(ops.el);
+            <span class="hljs-keyword">this</span>.timerId = <span class="hljs-literal">null</span>;
+            <span class="hljs-keyword">this</span>.elOriginalLeft = toInteger(<span class="hljs-keyword">this</span>.$el.css(<span class="hljs-string">"left"</span>));
+            <span class="hljs-keyword">this</span>.elOriginalTop = toInteger(<span class="hljs-keyword">this</span>.$el.css(<span class="hljs-string">"top"</span>));
+            <span class="hljs-comment">// this.driftX X轴的偏移总量</span>
+            <span class="hljs-comment">//this.driftY Y轴的偏移总量</span>
+            <span class="hljs-keyword">if</span> (ops.targetEl) {
+                <span class="hljs-keyword">this</span>.driftX = toInteger(_$(ops.targetEl).css(<span class="hljs-string">"left"</span>)) - <span class="hljs-keyword">this</span>.elOriginalLeft;
+                <span class="hljs-keyword">this</span>.driftY = toInteger(_$(ops.targetEl).css(<span class="hljs-string">"top"</span>)) - <span class="hljs-keyword">this</span>.elOriginalTop;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">this</span>.driftX = ops.offset[<span class="hljs-number">0</span>];
+                <span class="hljs-keyword">this</span>.driftY = ops.offset[<span class="hljs-number">1</span>];
+            }
+            <span class="hljs-keyword">this</span>.duration = ops.duration;
+            <span class="hljs-comment">// 处理公式常量</span>
+            <span class="hljs-keyword">this</span>.curvature = ops.curvature;
+            <span class="hljs-comment">// 根据两点坐标以及曲率确定运动曲线函数（也就是确定a, b的值）</span>
+            <span class="hljs-comment">//a=this.curvature</span>
+            <span class="hljs-comment">/* 公式： y = a*x*x + b*x + c;
+             */</span>
+            <span class="hljs-comment">/*
+             * 因为经过(0, 0), 因此c = 0
+             * 于是：
+             * y = a * x*x + b*x;
+             * y1 = a * x1*x1 + b*x1;
+             * y2 = a * x2*x2 + b*x2;
+             * 利用第二个坐标：
+             * b = (y2+ a*x2*x2) / x2
+             */</span>
+            <span class="hljs-comment">// 于是</span>
+            <span class="hljs-keyword">this</span>.b = ( <span class="hljs-keyword">this</span>.driftY - <span class="hljs-keyword">this</span>.curvature * <span class="hljs-keyword">this</span>.driftX * <span class="hljs-keyword">this</span>.driftX ) / <span class="hljs-keyword">this</span>.driftX;
+
+            <span class="hljs-comment">//自动开始</span>
+            <span class="hljs-keyword">if</span> (ops.autostart) {
+                <span class="hljs-keyword">this</span>.start();
+            }
+        },
+        <span class="hljs-comment">/**
+         * 初始化 配置参数 返回参数MAP
+         * @param {Object} options 插件配置 .
+         * @return {Object} 配置参数
+         */</span>
+        getOptions: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">"object"</span>) {
+                options = {};
+            }
+            options = $.extend({}, defaultSetting, _$(options.el).data(), (<span class="hljs-keyword">this</span>.options || {}), options);
+
+            <span class="hljs-keyword">return</span> options;
+        },
+        <span class="hljs-comment">/**
+         * 定位
+         * @param {Number} x x坐标 .
+         * @param {Object} y y坐标 .
+         * @return {Object} this
+         */</span>
+        domove: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(x, y)</span> </span>{
+
+            <span class="hljs-keyword">this</span>.$el.css({
+                position: <span class="hljs-string">"absolute"</span>,
+                left: <span class="hljs-keyword">this</span>.elOriginalLeft + x,
+                top: <span class="hljs-keyword">this</span>.elOriginalTop + y
+            });
+
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        },
+        <span class="hljs-comment">/**
+         * 每一步执行
+         * @param {Data} now 当前时间 .
+         * @return {Object} this
+         */</span>
+        step: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(now)</span> </span>{
+            <span class="hljs-keyword">var</span> ops = <span class="hljs-keyword">this</span>.options;
+            <span class="hljs-keyword">var</span> x, y;
+            <span class="hljs-keyword">if</span> (now &gt; <span class="hljs-keyword">this</span>.end) {
+                <span class="hljs-comment">// 运行结束</span>
+                x = <span class="hljs-keyword">this</span>.driftX;
+                y = <span class="hljs-keyword">this</span>.driftY;
+                <span class="hljs-keyword">this</span>.domove(x, y);
+                <span class="hljs-keyword">this</span>.stop();
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> ops.callback === <span class="hljs-string">'function'</span>) {
+                    ops.callback.call(<span class="hljs-keyword">this</span>);
+                }
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">//x 每一步的X轴的位置</span>
+                x = <span class="hljs-keyword">this</span>.driftX * ((now - <span class="hljs-keyword">this</span>.begin) / <span class="hljs-keyword">this</span>.duration);
+                <span class="hljs-comment">//每一步的Y轴的位置y = a*x*x + b*x + c;   c==0;</span>
+                y = <span class="hljs-keyword">this</span>.curvature * x * x + <span class="hljs-keyword">this</span>.b * x;
+
+                <span class="hljs-keyword">this</span>.domove(x, y);
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> ops.stepCallback === <span class="hljs-string">'function'</span>) {
+                    ops.stepCallback.call(<span class="hljs-keyword">this</span>,x,y);
+                }
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        },
+        <span class="hljs-comment">/**
+         * 设置options
+         *  @param {Object} options 当前时间 .
+         */</span>
+        setOptions: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(options)</span> </span>{
+            <span class="hljs-keyword">this</span>.reset();
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">"object"</span>) {
+                options = {};
+            }
+            <span class="hljs-keyword">this</span>.options = $.extend(<span class="hljs-keyword">this</span>.options,options);
+            <span class="hljs-keyword">this</span>.initialize(<span class="hljs-keyword">this</span>.options);
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        },
+        <span class="hljs-comment">/**
+         * 开始
+         */</span>
+        start: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+            <span class="hljs-comment">// 设置起止时间</span>
+            <span class="hljs-keyword">this</span>.begin = now();
+            <span class="hljs-keyword">this</span>.end = <span class="hljs-keyword">this</span>.begin + <span class="hljs-keyword">this</span>.duration;
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.driftX === <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">this</span>.driftY === <span class="hljs-number">0</span>) {
+                <span class="hljs-comment">// 原地踏步就别浪费性能了</span>
+                <span class="hljs-keyword">return</span>;
+            }
+            <span class="hljs-comment">/*timers.push(this);
+             Timer.start();*/</span>
+            <span class="hljs-keyword">if</span> (!!<span class="hljs-keyword">this</span>.timerId) {
+                clearInterval(<span class="hljs-keyword">this</span>.timerId);
+                <span class="hljs-keyword">this</span>.stop();
+            }
+            <span class="hljs-keyword">this</span>.timerId = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">var</span> t = now();
+                self.step(t);
+
+            }, <span class="hljs-number">13</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        },
+        <span class="hljs-comment">/**
+         * 重置
+         */</span>
+        reset: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(x, y)</span> </span>{
+            <span class="hljs-keyword">this</span>.stop();
+            x = x ? x : <span class="hljs-number">0</span>;
+            y = y ? y : <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">this</span>.domove(x, y);
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        },
+        <span class="hljs-comment">/**
+         * 停止
+         */</span>
+        stop: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">if</span> (!!<span class="hljs-keyword">this</span>.timerId) {
+                clearInterval(<span class="hljs-keyword">this</span>.timerId);
+
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+        }
+    };
+    <span class="hljs-keyword">var</span> defaultSetting = {
+        el: <span class="hljs-literal">null</span>,
+        <span class="hljs-comment">//偏移位置</span>
+        offset: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+        <span class="hljs-comment">//终点元素，这时就会自动获取该元素的left、top，设置了这个参数，offset将失效</span>
+        targetEl: <span class="hljs-literal">null</span>,
+        <span class="hljs-comment">//运动的时间，默认500毫秒</span>
+        duration: <span class="hljs-number">500</span>,
+        <span class="hljs-comment">//抛物线曲率，就是弯曲的程度，越接近于0越像直线，默认0.001</span>
+        curvature: <span class="hljs-number">0.001</span>,
+        <span class="hljs-comment">//运动后执行的回调函数</span>
+        callback: <span class="hljs-literal">null</span>,
+        <span class="hljs-comment">// 是否自动开始，默认为false</span>
+        autostart: <span class="hljs-literal">false</span>,
+        <span class="hljs-comment">//运动过程中执行的回调函数</span>
+        stepCallback: <span class="hljs-literal">null</span>
+    };
+    window.Parabola = Parabola;
+})();
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+         <span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> Parabola({
+        el: <span class="hljs-string">".start"</span>,
+        targetEl:<span class="hljs-string">".end"</span>,
+        <span class="hljs-comment">// offset: [600,400],</span>
+        curvature: <span class="hljs-number">0.0001</span>,
+        duration: <span class="hljs-number">2000</span>,
+        callback:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+            <span class="hljs-comment">// alert("完成后回调")</span>
+        },
+        <span class="hljs-comment">// stepCallback:function(x,y){</span>
+
+        <span class="hljs-comment">//     $("&lt;div&gt;").appendTo("body").css({</span>
+        <span class="hljs-comment">//         "position": "absolute",</span>
+        <span class="hljs-comment">//         "top": this.elOriginalTop + y,</span>
+        <span class="hljs-comment">//         "left":this.elOriginalLeft + x,</span>
+        <span class="hljs-comment">//         "background-color":"#CDCDCD",</span>
+        <span class="hljs-comment">//         "width":"5px",</span>
+        <span class="hljs-comment">//         "height":"5px",</span>
+        <span class="hljs-comment">//         "border-radius": "5px"</span>
+        <span class="hljs-comment">//     });</span>
+        <span class="hljs-comment">// }</span>
+    });
+          $(<span class="hljs-string">".start"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+        event.preventDefault();
+        bool.start();
+    });
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/jQuery/">#jQuery</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="53360396" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="53360396" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

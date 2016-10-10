@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js 自动播放幻灯片--带缓冲效果 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js 自动播放幻灯片--带缓冲效果</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 17, 2016</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>向上滚动的幻灯片<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">body</span>,<span class="hljs-selector-tag">div</span>,<span class="hljs-selector-tag">ul</span>,<span class="hljs-selector-tag">li</span> {<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;}
+        <span class="hljs-selector-tag">ul</span> {<span class="hljs-attribute">list-style</span>: none;}
+        <span class="hljs-selector-tag">body</span> {
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;
+            <span class="hljs-attribute">text-align</span>: center;
+            <span class="hljs-attribute">font</span>: <span class="hljs-number">12px</span>/<span class="hljs-number">20px</span> Arial;
+        }
+        <span class="hljs-selector-id">#box</span> {
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">490px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">172px</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span>;
+            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">8px</span> solid <span class="hljs-number">#fff</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> auto;
+            <span class="hljs-attribute">cursor</span>: pointer;
+        }
+        <span class="hljs-selector-class">.list</span> {
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">490px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">172px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+        }
+        <span class="hljs-selector-id">#box</span> <span class="hljs-selector-class">.list</span> <span class="hljs-selector-tag">ul</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-selector-class">.list</span> <span class="hljs-selector-tag">li</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">490px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">170px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+
+        }
+        <span class="hljs-selector-id">#box</span> <span class="hljs-selector-class">.count</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">bottom</span>: <span class="hljs-number">5px</span>;
+
+        }
+        <span class="hljs-selector-class">.count</span> <span class="hljs-selector-tag">li</span> {
+            <span class="hljs-attribute">float</span>: left;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">20px</span>;
+            <span class="hljs-attribute">cursor</span>: pointer;
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+            <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#f90</span>;
+            <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.7</span>;
+            <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">alpha</span>(opacity=<span class="hljs-number">70</span>);
+            <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">20px</span>;
+
+        }
+        <span class="hljs-selector-class">.count</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.current</span> {
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+            <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+            <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">alpha</span>(opacity=<span class="hljs-number">100</span>);
+            <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#f60</span>;
+        }
+        <span class="hljs-selector-id">#tmp</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+            <span class="hljs-attribute">background</span>: red;
+
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson7/img/03.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson7/img/02.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson7/img/03.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson7/img/04.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://js.fgm.cc/learn/lesson7/img/05.jpg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"count"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">""</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">""</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">""</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">""</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">""</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> oBox = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);
+            <span class="hljs-keyword">var</span> oList = oBox.getElementsByTagName(<span class="hljs-string">"ul"</span>)[<span class="hljs-number">0</span>];
+            <span class="hljs-keyword">var</span> aImg = oBox.getElementsByTagName(<span class="hljs-string">"img"</span>);
+            <span class="hljs-keyword">var</span> timer = playTimer = <span class="hljs-literal">null</span>;
+            <span class="hljs-keyword">var</span> index = i = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">var</span> bOrder = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">var</span> aTmp = [];
+            <span class="hljs-keyword">var</span> aBtn = <span class="hljs-literal">null</span>;
+            <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>;i &lt; aImg.length;i++) aTmp.push(<span class="hljs-string">"&lt;li&gt;"</span>+ (i+<span class="hljs-number">1</span>) +<span class="hljs-string">"&lt;/li&gt;"</span>);
+                <span class="hljs-keyword">var</span> oCount = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"ul"</span>);
+            oCount.className = <span class="hljs-string">"count"</span>;
+            oCount.innerHtml = aTmp.join(<span class="hljs-string">""</span>);
+            oBox.appendChild(oCount);
+            aBtn = oBox.getElementsByTagName(<span class="hljs-string">"ul"</span>)[<span class="hljs-number">1</span>].getElementsByTagName(<span class="hljs-string">"li"</span>)
+            <span class="hljs-comment">// 初始化</span>
+            cutover();
+            <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; aBtn.length;i++) {
+                aBtn[i].index = i;
+                aBtn[i].onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                    index = <span class="hljs-keyword">this</span>.index;
+                    cutover()
+                }
+            }
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cutover</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i&lt;aBtn.length;i++) aBtn[i].className = <span class="hljs-string">""</span>;
+                    aBtn[index].className = <span class="hljs-string">"current"</span>;
+                startMove(-(index*aImg[<span class="hljs-number">0</span>].offsetHeight))
+            }
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">next</span>(<span class="hljs-params"></span>) </span>{
+                bOrder ? index++:index--;
+                index &lt;= <span class="hljs-number">0</span>&amp;&amp;(index = <span class="hljs-number">0</span>,border = aBtn.length - <span class="hljs-number">1</span>,bOrder = <span class="hljs-literal">false</span>)
+                cutover()
+            }
+            playTimer = setInterval(next,<span class="hljs-number">3000</span>);
+            <span class="hljs-comment">// 鼠标移动停止自动播放</span>
+            oBox.onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                clearInterval(playTimer)
+            };
+            <span class="hljs-comment">// 鼠标离开展示区开始自动播放</span>
+            oBox.onmouseout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                playTimer = setInterval(next,<span class="hljs-number">3000</span>)
+            };
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startMove</span>(<span class="hljs-params">iTarget</span>) </span>{
+                clearInterval(timer);
+                timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                    doMove(iTarget)
+                },<span class="hljs-number">30</span>)
+            }
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doMove</span>(<span class="hljs-params">iTarget</span>) </span>{
+                <span class="hljs-keyword">var</span> iSpeed = (iTarget - oList.offsetTop)/<span class="hljs-number">10</span>;
+                iSpeed = iSpeed &gt;<span class="hljs-number">0</span>?<span class="hljs-built_in">Math</span>.ceil(iSpeed):<span class="hljs-built_in">Math</span>.floor(iSpeed);
+                oList.offsetTop == iTarget?clearInterval(timer):oList.style.top = oList.    offsetTop + iSpeed + <span class="hljs-string">"px"</span>
+            }
+
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="38094221" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="38094221" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

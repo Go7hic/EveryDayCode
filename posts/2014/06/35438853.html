@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js 点击输入框变化 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js 点击输入框变化</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 17, 2016</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>输入框高亮<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">body</span>,<span class="hljs-selector-tag">form</span>,<span class="hljs-selector-tag">h2</span>,<span class="hljs-selector-tag">p</span>,<span class="hljs-selector-tag">input</span> {<span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;}
+        <span class="hljs-selector-tag">body</span> {
+
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f4f4f</span>;
+            <span class="hljs-attribute">font</span>: <span class="hljs-number">14px</span>/<span class="hljs-number">1.5</span>;
+        }
+        <span class="hljs-selector-tag">form</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> auto;
+            <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            <span class="hljs-attribute">zoom</span>: <span class="hljs-number">1</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#fef4eb</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#f60</span>;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">h2</span> {
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#fe791e</span>;
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#ffebd7</span>;
+            <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#f60</span>;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">p</span> {
+            <span class="hljs-attribute">float</span>: left;
+            <span class="hljs-attribute">clear</span>:both;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">31px</span>;
+            <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">line-height</span>: <span class="hljs-number">31px</span>;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">label</span>,<span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">input</span>{<span class="hljs-attribute">float</span>:left;}
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">label</span>{
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">100px</span>;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">31px</span>;
+            <span class="hljs-attribute">text-align</span>:right;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">input</span>{
+            <span class="hljs-attribute">border</span>:<span class="hljs-number">0</span>;
+            <span class="hljs-attribute">font-family</span>:\<span class="hljs-number">5</span>fae\<span class="hljs-number">8</span>f6f\<span class="hljs-number">96</span>c5\<span class="hljs-number">9</span>ed1;
+            <span class="hljs-attribute">background</span>: origain;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-class">.text</span>,<span class="hljs-selector-tag">form</span> <span class="hljs-selector-class">.text-high</span>{
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">203px</span>;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">31px</span>;
+            <span class="hljs-attribute">padding-left</span>:<span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">line-height</span>:<span class="hljs-number">31px</span>;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-class">.text-high</span>{
+            <span class="hljs-attribute">background-position</span>:<span class="hljs-number">0</span> -<span class="hljs-number">31px</span>;
+        }
+        <span class="hljs-selector-tag">form</span> <span class="hljs-selector-class">.btn</span>{
+            <span class="hljs-attribute">color</span>:<span class="hljs-number">#fff</span>;
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">104px</span>;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">31px</span>;
+            <span class="hljs-attribute">cursor</span>:pointer;
+            <span class="hljs-attribute">font-size</span>:<span class="hljs-number">16px</span>;
+            <span class="hljs-attribute">background</span>:<span class="hljs-number">#f60</span>;
+            <span class="hljs-attribute">line-height</span>:<span class="hljs-number">31px</span>;
+            <span class="hljs-attribute">border-radius</span>:<span class="hljs-number">5px</span>;
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+<span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> aInput = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"input"</span>);
+    <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; aInput.length - <span class="hljs-number">1</span>; i++) {
+        aInput[i].onfocus = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.className = <span class="hljs-string">"text-high"</span>
+        };
+        aInput[i].onblur = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">this</span>.className = <span class="hljs-string">"text"</span>
+        }
+    }
+};
+
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">""</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>用户登录<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">""</span>&gt;</span>用户名<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">""</span>&gt;</span>密码<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"登录"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="35438853" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="35438853" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js事件练习：绑定，接触 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js事件练习：绑定，接触</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 11, 2015</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>事件练习<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">pre</span> {
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">15px</span>;
+            <span class="hljs-attribute">color</span>: green;
+            <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f0f0f0</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> dotted <span class="hljs-number">#333</span>;
+            <span class="hljs-attribute">font</span>: <span class="hljs-number">12px</span>/<span class="hljs-number">1.5</span>;
+        }
+        <span class="hljs-selector-tag">span</span> {<span class="hljs-attribute">color</span>: <span class="hljs-number">#999</span>;}
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+
+        <span class="hljs-keyword">var</span> EventUtil = {
+            addHandler: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">oElement, sEvent, fnHandler</span>) </span>{
+                oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, <span class="hljs-literal">false</span>) : oElement.attachEvent(<span class="hljs-string">"on"</span> + sEvent, fnHandler)
+            },
+            removeHandler: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">oElement, sEvent, fnHandler</span>) </span>{
+                oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, <span class="hljs-literal">false</span>) : oElement.detachEvent(<span class="hljs-string">"on"</span> + sEvent, fnHandler)
+            },
+            addLoadHandler: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fnHandler</span>) </span>{
+                <span class="hljs-keyword">this</span>.addHandler(<span class="hljs-built_in">window</span>, <span class="hljs-string">"load"</span>, fnHandler)
+            }
+        };
+        EventUtil.addLoadHandler(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> aBtn = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"input"</span>);
+
+            <span class="hljs-comment">//为第一个按钮添加绑定事件</span>
+            EventUtil.addHandler(aBtn[<span class="hljs-number">1</span>], <span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                EventUtil.addHandler(aBtn[<span class="hljs-number">0</span>], <span class="hljs-string">"click"</span>, fnHandler);
+                aBtn[<span class="hljs-number">0</span>].value = <span class="hljs-string">"我可以点击了"</span>
+            });
+
+            <span class="hljs-comment">//解除第一个按钮的绑定事件</span>
+            EventUtil.addHandler(aBtn[<span class="hljs-number">2</span>], <span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+                EventUtil.removeHandler(aBtn[<span class="hljs-number">0</span>], <span class="hljs-string">"click"</span>, fnHandler);
+                aBtn[<span class="hljs-number">0</span>].value = <span class="hljs-string">"毫无用处的按钮"</span>
+            });
+
+            <span class="hljs-comment">//事件处理函数</span>
+            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnHandler</span> (<span class="hljs-params"></span>) </span>{
+                alert(<span class="hljs-string">"事件绑定成功！"</span>)
+            }
+        })
+
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>&amp;lt;script type="text/javascript"&amp;gt;
+        var EventUtil = {
+        addHandler: function (oElement, sEvent, fnHandler) {
+        oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent("on" + sEvent, fnHandler)
+    },
+    removeHandler: function (oElement, sEvent, fnHandler) {
+    oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent("on" + sEvent, fnHandler)
+},
+addLoadHandler: function (fnHandler) {
+this.addHandler(window, "load", fnHandler)
+}
+}
+&amp;lt;/script&amp;gt;
+<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">center</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"毫无用处的按钮"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"绑定click"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"解除绑定"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">center</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="37141093" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="37141093" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>

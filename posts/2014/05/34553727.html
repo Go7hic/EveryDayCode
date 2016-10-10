@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate" />
+<link rel="icon" href="/assets/icon.png" />
+<title>js 键盘控制DIV事件，移动，放大等效果 - Every Day Code </title>
+<link rel="stylesheet" href="/assets/acyort.css" />
+</head>
+<body>
+
+<div class="header">
+    <div class="center">
+        <h1><a href="/">Every Day Code</a></h1>
+        <p></p>
+    </div>
+    <div class="menu">
+        <a href="/">home</a>
+        <a href="/page/about/">about</a>
+        <a href="/archives/">archives</a>
+    </div>
+</div>
+
+<div id="post" class="center">
+
+    <h1>js 键盘控制DIV事件，移动，放大等效果</h1>
+    <p><a href="https://github.com/dyygtfx">dyygtfx</a> Updated at Feb 17, 2016</p>
+
+    <div class="content"><pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>键盘控制div移动<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">html</span>,<span class="hljs-selector-tag">body</span> {<span class="hljs-attribute">overflow</span>: hidden;}
+        <span class="hljs-selector-tag">body</span> {
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-selector-tag">pre</span> {
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">15px</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">12px</span>;
+            <span class="hljs-attribute">color</span>: green;
+            <span class="hljs-attribute">background</span>: <span class="hljs-number">#f0f0f0</span>;
+        }
+        <span class="hljs-selector-tag">span</span> {<span class="hljs-attribute">color</span>: <span class="hljs-number">#999</span>;}
+        <span class="hljs-selector-id">#box</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">top</span>: <span class="hljs-number">50px</span>;
+            <span class="hljs-attribute">left</span>: <span class="hljs-number">300px</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+            <span class="hljs-attribute">background-color</span>: red;
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> oBox = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);
+            <span class="hljs-keyword">var</span> bLeft = bTop = bRight = bBottom = bCtrlKey = <span class="hljs-literal">false</span>;
+
+            setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>)
+            </span>{
+                <span class="hljs-keyword">if</span> (bLeft)
+                {
+                    oBox.style.left = oBox.offsetLeft - <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (bRight)
+                {
+                    oBox.style.left = oBox.offsetLeft + <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+                }
+
+                <span class="hljs-keyword">if</span> (bTop)
+                {
+                    oBox.style.top = oBox.offsetTop - <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(bBottom)
+                {
+                    oBox.style.top = oBox.offsetTop + <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+                }
+        <span class="hljs-comment">//防止溢出</span>
+        limit();
+    },<span class="hljs-number">30</span>);
+
+            <span class="hljs-built_in">document</span>.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+                <span class="hljs-keyword">var</span> event = event || <span class="hljs-built_in">window</span>.event;
+                bCtrlKey = event.ctrlKey;
+
+                <span class="hljs-keyword">switch</span> (event.keyCode) {
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">37</span>:
+                    bLeft = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">38</span>:
+                    <span class="hljs-keyword">if</span>(bCtrlKey) {
+                        <span class="hljs-keyword">var</span> oldWidth = oBox.offsetWidth;
+                        <span class="hljs-keyword">var</span> oldHeight = oBox.offsetHeight;
+
+                        oBox.style.width = oBox.offsetWidth * <span class="hljs-number">1.5</span> + <span class="hljs-string">"px"</span>;
+                        oBox.style.height = oBox.offsetHeight * <span class="hljs-number">1.5</span> + <span class="hljs-string">"px"</span>;
+
+                        oBox.style.left = oBox.offsetLeft - (oBox.offsetWidth - oldWidth) / <span class="hljs-number">2</span> + <span class="hljs-string">"px"</span>;
+                        oBox.style.top = oBox.offsetTop - (oBox.offsetHeight - oldHeight) / <span class="hljs-number">2</span> + <span class="hljs-string">"px"</span>;
+
+                        <span class="hljs-keyword">break</span>;
+                    }
+                    bTop = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">39</span>:
+                    bRight = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">40</span>:
+                    <span class="hljs-keyword">if</span>(bCtrlKey) {
+                        <span class="hljs-keyword">var</span> oldWidth = oBox.offsetWidth;
+                        <span class="hljs-keyword">var</span> oldHeight = oBox.offsetHeight;
+
+                        oBox.style.width = oBox.offsetWidth * <span class="hljs-number">0.75</span> + <span class="hljs-string">"px"</span>;
+                        oBox.style.height = oBox.offsetHeight * <span class="hljs-number">0.75</span> + <span class="hljs-string">"px"</span>;
+
+                        oBox.style.left = oBox.offsetLeft - (oBox.offsetWidth - oldWidth) / <span class="hljs-number">2</span> + <span class="hljs-string">"px"</span>;
+                        oBox.style.top = oBox.offsetTop - (oBox.offsetHeight - oldHeight) / <span class="hljs-number">2</span> + <span class="hljs-string">"px"</span>;
+
+                        <span class="hljs-keyword">break</span>;
+                    }
+                    bBottom = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">49</span>:
+                    bCtrlKey &amp;&amp; (oBox.style.background = <span class="hljs-string">"green"</span>);
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">50</span>:
+                    bCtrlKey &amp;&amp; (oBox.style.background = <span class="hljs-string">"yellow"</span>);
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">51</span>:
+                    bCtrlKey &amp;&amp; (oBox.style.background = <span class="hljs-string">"blue"</span>);
+                    <span class="hljs-keyword">break</span>;
+                }
+
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+            };
+
+            <span class="hljs-built_in">document</span>.onkeyup = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
+                <span class="hljs-keyword">switch</span> ((event || <span class="hljs-built_in">window</span>.event).keyCode) {
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">37</span>:
+                    bLeft = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">38</span>:
+                    bTop = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">39</span>:
+                    bRight = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-number">40</span>:
+                    bBottom = <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">break</span>;
+                }
+            };
+
+    <span class="hljs-comment">//防止溢出</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">limit</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> doc = [<span class="hljs-built_in">document</span>.documentElement.clientWidth, <span class="hljs-built_in">document</span>.documentElement.clientHeight]
+        <span class="hljs-comment">//防止左侧溢出</span>
+        oBox.offsetLeft &lt;=<span class="hljs-number">0</span> &amp;&amp; (oBox.style.left = <span class="hljs-number">0</span>);
+        <span class="hljs-comment">//防止顶部溢出</span>
+        oBox.offsetTop &lt;=<span class="hljs-number">0</span> &amp;&amp; (oBox.style.top = <span class="hljs-number">0</span>);
+        <span class="hljs-comment">//防止右侧溢出</span>
+        doc[<span class="hljs-number">0</span>] - oBox.offsetLeft - oBox.offsetWidth &lt;= <span class="hljs-number">0</span> &amp;&amp; (oBox.style.left = doc[<span class="hljs-number">0</span>] - oBox.offsetWidth + <span class="hljs-string">"px"</span>);
+        <span class="hljs-comment">//防止底部溢出</span>
+        doc[<span class="hljs-number">1</span>] - oBox.offsetTop - oBox.offsetHeight &lt;= <span class="hljs-number">0</span> &amp;&amp; (oBox.style.top = doc[<span class="hljs-number">1</span>] - oBox.offsetHeight + <span class="hljs-string">"px"</span>)
+    }
+};
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>红色方块为键盘操作区域，您可以进行如下操作：
+
+        上：↑ 下：↓ 左：← 右：→
+
+        Ctrl + 1 : 背景变为绿色
+        Ctrl + 2 : 背景变为黄色
+        Ctrl + 3 : 背景变为蓝色
+        Ctrl + ↑ : 放大
+        Ctrl + ↓ : 缩小
+    <span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+</div>
+
+    <div class="label">
+    <div><a href="/tags/原生 JS/">#原生 JS</a></div>
+    </div>
+
+    <div class="comment_list hide" id="disqus_thread"></div>
+    <div id="duoshuo_thread" class="comment_list hide ds-thread" data-thread-key="34553727" data-title="" data-url=""></div>
+
+    <button class="hide" data-id="34553727" id="comment">Add Comments</button>
+
+</div>
+
+<div class="footer">
+    <div class="center">
+        © 2016 Every Day Code . <a target="_blank" href="https://github.com/LoeiFy/AcyOrt">AcyOrt</a> . <a target="_blank" href="/rss.xml">RSS</a>
+    </div>
+</div>
+
+<script>
+
+if ('哥特复兴'.length > 0) {
+    document.getElementById('comment').classList.remove('hide')
+}
+
+var duoshuoQuery = {short_name: '哥特复兴'};
+
+document.getElementById('comment').addEventListener('click', function() {
+
+    this.style.display = 'none';
+
+    var identifier = this.getAttribute('data-id'),
+        title = document.title,
+        url = location.href.split('?')[0];
+
+    document.getElementById('duoshuo_thread').setAttribute('data-title', title)
+    document.getElementById('duoshuo_thread').setAttribute('data-url', url)
+
+    var disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+    };
+
+    var sc = document.createElement('script'); 
+    sc.async = true;
+    sc.src = (location.protocol == 'https:' ? 'https:' : 'http:') + '//哥特复兴.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(sc);
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('disqus') > -1) {
+        document.getElementById('disqus_thread').classList.remove('hide')
+    }
+
+    if ('//哥特复兴.disqus.com/embed.js'.indexOf('duoshuo') > -1) {
+        document.getElementById('duoshuo_thread').classList.remove('hide')
+    }
+
+}, false)
+
+</script>
+
+</body>
+</html>
